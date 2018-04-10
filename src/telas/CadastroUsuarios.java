@@ -25,6 +25,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.DropMode;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
 
 public class CadastroUsuarios extends JInternalFrame {
 	private JTextField textField_1;
@@ -40,23 +41,16 @@ public class CadastroUsuarios extends JInternalFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CadastroUsuarios frame = new CadastroUsuarios();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public CadastroUsuarios() {
+		setResizable(true);
+		setTitle("Cadastro de Usu\u00E1rios");
+		setMaximizable(true);
+		setClosable(true);
 		setRootPaneCheckingEnabled(false);
 		setBounds(100, 100, 533, 320);
 		getContentPane().setLayout(null);

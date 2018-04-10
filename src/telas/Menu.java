@@ -33,29 +33,15 @@ public class Menu extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Menu frame = new Menu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public Menu() {
+	public Menu(int user) {
+		setTitle("Platinum Chest");
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		JPanel panel = new JPanel();
-		panel.setLayout(new CardLayout(0, 0));
+		
+		JDesktopPane panel = new JDesktopPane();
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -69,8 +55,9 @@ public class Menu extends JFrame {
 		JMenuItem mntmCadastro_1 = new JMenuItem("Cadastro");
 		mntmCadastro_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CadastroProdutos p = new CadastroProdutos();
-				panel.add(p);
+				CadastroProdutos cadastro = new CadastroProdutos();
+				cadastro.setVisible(true);
+				panel.add(cadastro);
 			}
 		});
 		mnProdutos.add(mntmCadastro_1);
@@ -128,6 +115,7 @@ public class Menu extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		contentPane.add(panel, BorderLayout.CENTER);	
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new CardLayout(0, 0));
 	}
 }
