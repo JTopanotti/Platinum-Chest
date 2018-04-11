@@ -38,7 +38,7 @@ public class Login extends JFrame {
 	
 	private int check(String user, String pass) {
 		//Busca do usuario no banco de dados
-		if(user == "gustavo" && pass== "123") {
+		if(user.equals("gustavo") && pass.equals("123")) {
 			return 1;
 		}
 		else {

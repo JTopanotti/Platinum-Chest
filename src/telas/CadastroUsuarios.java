@@ -52,118 +52,147 @@ public class CadastroUsuarios extends JInternalFrame {
 		setMaximizable(true);
 		setClosable(true);
 		setRootPaneCheckingEnabled(false);
-		setBounds(100, 100, 533, 320);
+		setBounds(100, 100, 597, 370);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 371, 268);
+		panel.setBounds(8, 6, 425, 307);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(96, 36, 265, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(55, 39, 31, 14);
-		panel.add(lblNome);
 		
 		JLabel label = new JLabel("");
 		label.setBounds(40, 39, 46, 14);
 		panel.add(label);
 		
-		JLabel lblNewLabel = new JLabel("Classifica\u00E7\u00E3o:");
-		lblNewLabel.setBounds(21, 64, 65, 14);
-		panel.add(lblNewLabel);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(54, 2, 256, 29);
+		panel.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
-		lblUsurio.setBounds(46, 14, 40, 14);
-		panel.add(lblUsurio);
+		panel_2.add(lblUsurio, BorderLayout.WEST);
 		
 		textField = new JTextField();
+		panel_2.add(textField, BorderLayout.CENTER);
 		textField.setEditable(false);
-		textField.setBounds(96, 11, 86, 20);
-		panel.add(textField);
 		textField.setColumns(10);
 		
-		JComboBox list = new JComboBox();
-		list.setModel(new DefaultComboBoxModel(new String[] {"1- Gerente", "2- Funcionario"}));
-		list.setSelectedIndex(0);
-		list.setBounds(96, 61, 117, 20);
-		panel.add(list);
-		
-		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(63, 89, 23, 14);
-		panel.add(lblCpf);
-		
-		formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(96, 86, 117, 20);
-		panel.add(formattedTextField);
-		
-		JLabel lblEndereo = new JLabel("Endere\u00E7o:");
-		lblEndereo.setBounds(37, 114, 49, 14);
-		panel.add(lblEndereo);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(96, 111, 265, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
-		
-		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(49, 139, 37, 14);
-		panel.add(lblCidade);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(96, 136, 139, 20);
-		panel.add(textField_3);
-		
-		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(49, 164, 37, 14);
-		panel.add(lblEstado);
-		
-		textField_4 = new JComboBox();
-		textField_4.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
-		textField_4.setBounds(96, 161, 139, 20);
-		panel.add(textField_4);
-		
-		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
-		lblSituao.setBounds(40, 240, 45, 14);
-		panel.add(lblSituao);
-		
-		textField_5 = new JComboBox();
-		textField_5.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
-		textField_5.setBounds(96, 237, 86, 20);
-		panel.add(textField_5);
-		
 		JButton btnPesquisar = new JButton("Pesquisar");
+		panel_2.add(btnPesquisar, BorderLayout.EAST);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(65, 29, 259, 29);
+		panel.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNome = new JLabel("Nome:");
+		panel_3.add(lblNome, BorderLayout.WEST);
+		
+				textField_1 = new JTextField();
+				panel_3.add(textField_1, BorderLayout.CENTER);
+				textField_1.setColumns(10);
+				
+				JPanel panel_4 = new JPanel();
+				panel_4.setBounds(18, 61, 249, 29);
+				panel.add(panel_4);
+				panel_4.setLayout(new BorderLayout(0, 0));
+				
+				JLabel lblNewLabel = new JLabel("Classifica\u00E7\u00E3o:");
+				panel_4.add(lblNewLabel, BorderLayout.WEST);
+				
+				JComboBox list = new JComboBox();
+				panel_4.add(list, BorderLayout.CENTER);
+				list.setModel(new DefaultComboBoxModel(new String[] {"1- Gerente", "2- Funcionario"}));
+				list.setSelectedIndex(0);
+				
+				JPanel panel_5 = new JPanel();
+				panel_5.setBounds(79, 89, 235, 29);
+				panel.add(panel_5);
+				panel_5.setLayout(new BorderLayout(0, 0));
+				
+				JLabel lblCpf = new JLabel("CPF:");
+				panel_5.add(lblCpf, BorderLayout.WEST);
+				
+				formattedTextField = new JFormattedTextField();
+				panel_5.add(formattedTextField, BorderLayout.CENTER);
+				
+				JPanel panel_6 = new JPanel();
+				panel_6.setBounds(45, 120, 235, 29);
+				panel.add(panel_6);
+				panel_6.setLayout(new BorderLayout(0, 0));
+				
+				JLabel lblEndereo = new JLabel("Endere\u00E7o:");
+				panel_6.add(lblEndereo, BorderLayout.WEST);
+				
+				textField_2 = new JTextField();
+				panel_6.add(textField_2, BorderLayout.CENTER);
+				textField_2.setColumns(10);
+				
+				JPanel panel_7 = new JPanel();
+				panel_7.setBounds(58, 151, 235, 29);
+				panel.add(panel_7);
+				panel_7.setLayout(new BorderLayout(0, 0));
+				
+				JLabel lblCidade = new JLabel("Cidade:");
+				panel_7.add(lblCidade, BorderLayout.WEST);
+				
+				textField_3 = new JTextField();
+				panel_7.add(textField_3, BorderLayout.CENTER);
+				
+				JPanel panel_8 = new JPanel();
+				panel_8.setBounds(57, 182, 235, 29);
+				panel.add(panel_8);
+				panel_8.setLayout(new BorderLayout(0, 0));
+				
+				JLabel lblEstado = new JLabel("Estado:");
+				panel_8.add(lblEstado, BorderLayout.WEST);
+				
+				textField_4 = new JComboBox();
+				panel_8.add(textField_4, BorderLayout.CENTER);
+				textField_4.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
+				
+				JPanel panel_9 = new JPanel();
+				panel_9.setBounds(46, 213, 235, 29);
+				panel.add(panel_9);
+				panel_9.setLayout(new BorderLayout(0, 0));
+				
+				JLabel lblTelefone = new JLabel("Telefone:");
+				panel_9.add(lblTelefone, BorderLayout.WEST);
+				
+				textField_6 = new JTextField();
+				panel_9.add(textField_6, BorderLayout.CENTER);
+				textField_6.setColumns(10);
+				
+				JPanel panel_10 = new JPanel();
+				panel_10.setBounds(66, 246, 235, 29);
+				panel.add(panel_10);
+				panel_10.setLayout(new BorderLayout(0, 0));
+				
+				JLabel lblEmail = new JLabel("Email:");
+				panel_10.add(lblEmail, BorderLayout.WEST);
+				
+				textField_7 = new JTextField();
+				panel_10.add(textField_7, BorderLayout.CENTER);
+				textField_7.setColumns(10);
+				
+				JPanel panel_11 = new JPanel();
+				panel_11.setBounds(46, 276, 235, 29);
+				panel.add(panel_11);
+				panel_11.setLayout(new BorderLayout(0, 0));
+				
+				JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
+				panel_11.add(lblSituao, BorderLayout.WEST);
+				
+				textField_5 = new JComboBox();
+				panel_11.add(textField_5, BorderLayout.CENTER);
+				textField_5.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnPesquisar.setBounds(185, 11, 79, 20);
-		panel.add(btnPesquisar);
-		
-		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(40, 189, 46, 14);
-		panel.add(lblTelefone);
-		
-		textField_6 = new JTextField();
-		textField_6.setBounds(96, 186, 139, 20);
-		panel.add(textField_6);
-		textField_6.setColumns(10);
-		
-		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(58, 215, 28, 14);
-		panel.add(lblEmail);
-		
-		textField_7 = new JTextField();
-		textField_7.setBounds(96, 212, 139, 20);
-		panel.add(textField_7);
-		textField_7.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(391, 11, 116, 268);
+		panel_1.setBounds(444, 7, 116, 268);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
