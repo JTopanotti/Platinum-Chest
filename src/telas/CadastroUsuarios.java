@@ -192,7 +192,7 @@ public class CadastroUsuarios extends JInternalFrame {
 		});
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(444, 7, 116, 268);
+		panel_1.setBounds(444, 7, 116, 305);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		

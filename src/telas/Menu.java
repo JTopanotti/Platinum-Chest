@@ -43,78 +43,65 @@ public class Menu extends JFrame {
 		
 		JDesktopPane panel = new JDesktopPane();
 		
+		JMenu mnCadastro = new JMenu("Cadastro");
+		JMenu mnProdutos = new JMenu("Produtos");
+		JMenu mnFornecedores = new JMenu("Fornecedores");
+		JMenu mnUsuarios = new JMenu("Usu\u00E1rios");
+		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
+		JMenuItem miCadastroProduto = new JMenuItem("Cadastro");
+		JMenuItem miCadastroUsuario = new JMenuItem("Cadastro");
+		JMenuItem miCadastroFornecedor = new JMenuItem("Cadastro");
+		JMenuItem miConsultaUsuario = new JMenuItem("Consulta");
+		JMenuItem miConsultaProduto = new JMenuItem("Consulta");
+		JMenuItem miConsultaFornecedor = new JMenuItem("Consulta");
+		JMenuItem miMovimentacao = new JMenuItem("Movimenta\u00E7\u00E3o");
+		JMenuItem mntmMovimentaes = new JMenuItem("Movimenta\u00E7\u00F5es");
+		JMenuItem mntmSetores = new JMenuItem("Setores");
+		JMenuItem mntmSetores_1 = new JMenuItem("Setores");
+		JMenuItem mntmProdutos = new JMenuItem("Produtos");
+		JMenu mnSobre = new JMenu("Sobre");
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnCadastro = new JMenu("Cadastro");
+		miCadastroProduto.addActionListener((e) -> {
+			CadastroProdutos cadastroProduto = new CadastroProdutos();
+			cadastroProduto.setVisible(true);
+			panel.add(cadastroProduto);
+		});
+		miCadastroUsuario.addActionListener((e) -> {
+			CadastroUsuarios cadastroUsuario = new CadastroUsuarios();
+			cadastroUsuario.setVisible(true);
+			panel.add(cadastroUsuario);
+		});
+		miCadastroFornecedor.addActionListener((e) -> {
+			CadastroFornecedores cadastroFornecedor 
+				= new CadastroFornecedores();
+			cadastroFornecedor.setVisible(true);
+			panel.add(cadastroFornecedor);
+		});
+		
 		menuBar.add(mnCadastro);
-		
-		JMenu mnProdutos = new JMenu("Produtos");
 		mnCadastro.add(mnProdutos);
-		
-		JMenuItem mntmCadastro_1 = new JMenuItem("Cadastro");
-		mntmCadastro_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				CadastroProdutos cadastro = new CadastroProdutos();
-				cadastro.setVisible(true);
-				panel.add(cadastro);
-			}
-		});
-		mnProdutos.add(mntmCadastro_1);
-		
-		JMenuItem mntmConsulta = new JMenuItem("Consulta");
-		mnProdutos.add(mntmConsulta);
-		
-		JMenuItem mntmMovimentao = new JMenuItem("Movimenta\u00E7\u00E3o");
-		mnProdutos.add(mntmMovimentao);
-		
-		JMenu mnUsurios = new JMenu("Usu\u00E1rios");
-		mnCadastro.add(mnUsurios);
-		
-		JMenuItem mntmCadastro = new JMenuItem("Cadastro");
-		mntmCadastro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CadastroUsuarios cadastro = new CadastroUsuarios();
-				cadastro.setVisible(true);
-				panel.add(cadastro);
-			}
-		});
-		mnUsurios.add(mntmCadastro);
-		
-		JMenuItem mntmConsulta_1 = new JMenuItem("Consulta");
-		mnUsurios.add(mntmConsulta_1);
-		
-		JMenu mnFornecedores = new JMenu("Fornecedores");
+		mnProdutos.add(miCadastroProduto);
+		mnProdutos.add(miConsultaProduto);
+		mnProdutos.add(miMovimentacao);
+		mnCadastro.add(mnUsuarios);
+		mnUsuarios.add(miCadastroUsuario);
+		mnUsuarios.add(miConsultaUsuario);
 		mnCadastro.add(mnFornecedores);
-		
-		JMenuItem mntmCadastro_2 = new JMenuItem("Cadastro");
-		mnFornecedores.add(mntmCadastro_2);
-		
-		JMenuItem mntmConsulta_2 = new JMenuItem("Consulta");
-		mnFornecedores.add(mntmConsulta_2);
-		
-		JMenuItem mntmSetores = new JMenuItem("Setores");
+		mnFornecedores.add(miCadastroFornecedor);
+		mnFornecedores.add(miConsultaFornecedor);
 		mnCadastro.add(mntmSetores);
-		
-		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
 		menuBar.add(mnRelatrios);
-		
-		JMenuItem mntmProdutos = new JMenuItem("Produtos");
 		mnRelatrios.add(mntmProdutos);
-		
-		JMenuItem mntmMovimentaes = new JMenuItem("Movimenta\u00E7\u00F5es");
 		mnRelatrios.add(mntmMovimentaes);
-		
-		JMenuItem mntmSetores_1 = new JMenuItem("Setores");
 		mnRelatrios.add(mntmSetores_1);
-		
-		JMenu mnSobre = new JMenu("Sobre");
 		menuBar.add(mnSobre);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new CardLayout(0, 0));
 	}
