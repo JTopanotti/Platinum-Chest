@@ -7,12 +7,13 @@ import java.sql.SQLException;
 
 
 
-public class Conexao {
+public final class Conexao {
 	private String host = "gutinho0710.ddns.net:54321";
 	private String banco = "platinum_chest";
 	private String usuario = "pc";
 	private String senha = "pc2018";
-	private String url = "jdbc:mysql://" + host + "/" + banco;
+	private String url = "jdbc:mysql://" + host + "/" + banco
+			+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private Connection conexao = null;
 	
 	public Connection getConexao() {
@@ -33,5 +34,4 @@ public class Conexao {
 			}
 		}
 	}
-	
 }

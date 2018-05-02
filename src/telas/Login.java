@@ -12,13 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import db.Conexao;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField caixauser;
 	private JTextField caixapass;
-
 	/**
 	 * Launch the application.
 	 */
@@ -28,7 +28,6 @@ public class Login extends JFrame {
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
