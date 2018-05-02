@@ -90,7 +90,6 @@ public class CadastroProdutos extends JInternalFrame {
 		
 		JComboBox list = new JComboBox();
 		panel_3.add(list, BorderLayout.CENTER);
-		list.setSelectedIndex(0);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBounds(69, 106, 141, 29);
