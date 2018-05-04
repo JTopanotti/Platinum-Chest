@@ -27,16 +27,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CadastroItem extends JInternalFrame {
-	private JTextField textField_1;
-	private JTextField textField;
-	private JFormattedTextField formattedTextField;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JComboBox textField_5;
-	private JComboBox textField_6;
-	private JComboBox textField_7;
-	private JTextField textField_4;
-	private JTextField textField_8;
+	private JTextField nome;
+	private JTextField item;
+	private JFormattedTextField nf;
+	private JTextField valor;
+	private JTextField deprec;
+	private JComboBox situacao;
+	private JComboBox fornecedor;
+	private JComboBox usuario;
+	private JTextField data_compra;
+	private JTextField data_ger;
 
 	/**
 	 * Launch the application.
@@ -67,141 +67,137 @@ public class CadastroItem extends JInternalFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(40, 39, 46, 14);
-		panel.add(label);
-		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(64, 7, 251, 20);
+		panel_2.setBounds(64, 5, 251, 20);
 		panel.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblItem = new JLabel("Item:");
 		panel_2.add(lblItem, BorderLayout.WEST);
 		
-		textField = new JTextField();
-		panel_2.add(textField, BorderLayout.CENTER);
-		textField.setEditable(false);
-		textField.setColumns(10);
+		item = new JTextField();
+		panel_2.add(item, BorderLayout.CENTER);
+		item.setEditable(false);
+		item.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
 		panel_2.add(btnPesquisar, BorderLayout.EAST);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(56, 29, 251, 20);
+		panel_3.setBounds(56, 30, 251, 20);
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNome = new JLabel("Nome:");
 		panel_3.add(lblNome, BorderLayout.WEST);
 		
-		textField_1 = new JTextField();
-		panel_3.add(textField_1, BorderLayout.CENTER);
-		textField_1.setColumns(10);
+		nome = new JTextField();
+		panel_3.add(nome, BorderLayout.CENTER);
+		nome.setColumns(10);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(59, 53, 194, 20);
+		panel_4.setBounds(59, 55, 194, 20);
 		panel.add(panel_4);
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JLabel Setor = new JLabel("Setor:");
 		panel_4.add(Setor, BorderLayout.WEST);
 		
-		JComboBox list = new JComboBox();
-		panel_4.add(list, BorderLayout.CENTER);
-		list.setSelectedIndex(0);
+		JComboBox setor = new JComboBox();
+		panel_4.add(setor, BorderLayout.CENTER);
+		setor.setSelectedIndex(0);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(76, 77, 134, 20);
+		panel_5.setBounds(76, 80, 134, 20);
 		panel.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNF = new JLabel("NF:");
 		panel_5.add(lblNF, BorderLayout.WEST);
 		
-		formattedTextField = new JFormattedTextField();
-		panel_5.add(formattedTextField, BorderLayout.CENTER);
+		nf = new JFormattedTextField();
+		panel_5.add(nf, BorderLayout.CENTER);
 		
 		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(61, 101, 135, 20);
+		panel_6.setBounds(61, 105, 135, 20);
 		panel.add(panel_6);
 		panel_6.setLayout(new BorderLayout(0, 0));
 		
 		JLabel Valor = new JLabel("Valor:");
 		panel_6.add(Valor, BorderLayout.WEST);
 		
-		textField_2 = new JTextField();
-		panel_6.add(textField_2, BorderLayout.CENTER);
-		textField_2.setColumns(10);
+		valor = new JTextField();
+		panel_6.add(valor, BorderLayout.CENTER);
+		valor.setColumns(10);
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBounds(16, 126, 251, 20);
+		panel_7.setBounds(16, 130, 251, 20);
 		panel.add(panel_7);
 		panel_7.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblDepr = new JLabel("Deprecia\u00E7\u00E3o:");
 		panel_7.add(lblDepr, BorderLayout.WEST);
 		
-		textField_3 = new JTextField();
-		panel_7.add(textField_3, BorderLayout.CENTER);
+		deprec = new JTextField();
+		panel_7.add(deprec, BorderLayout.CENTER);
 		
 		JPanel panel_8 = new JPanel();
-		panel_8.setBounds(13, 150, 190, 20);
+		panel_8.setBounds(13, 155, 190, 20);
 		panel.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblDataC = new JLabel("Data compra:");
 		panel_8.add(lblDataC, BorderLayout.WEST);
 		
-		textField_4 = new JTextField();
-		panel_8.add(textField_4, BorderLayout.CENTER);
-		textField_4.setColumns(10);
+		data_compra = new JTextField();
+		panel_8.add(data_compra, BorderLayout.CENTER);
+		data_compra.setColumns(10);
 		
 		JPanel panel_9 = new JPanel();
-		panel_9.setBounds(22, 174, 243, 20);
+		panel_9.setBounds(22, 180, 243, 20);
 		panel.add(panel_9);
 		panel_9.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblForn = new JLabel("Fornecedor:");
 		panel_9.add(lblForn, BorderLayout.WEST);
 		
-		textField_6 = new JComboBox();
-		panel_9.add(textField_6, BorderLayout.CENTER);
+		fornecedor = new JComboBox();
+		panel_9.add(fornecedor, BorderLayout.CENTER);
 		
 		JPanel panel_10 = new JPanel();
-		panel_10.setBounds(11, 199, 212, 20);
+		panel_10.setBounds(11, 205, 212, 20);
 		panel.add(panel_10);
 		panel_10.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblEmail = new JLabel("Usu. Gera\u00E7\u00E3o:");
 		panel_10.add(lblEmail, BorderLayout.WEST);
 		
-		textField_7 = new JComboBox();
-		panel_10.add(textField_7, BorderLayout.CENTER);
+		usuario = new JComboBox();
+		panel_10.add(usuario, BorderLayout.CENTER);
 		
 		JPanel panel_11 = new JPanel();
-		panel_11.setBounds(12, 222, 189, 20);
+		panel_11.setBounds(12, 230, 189, 20);
 		panel.add(panel_11);
 		panel_11.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblDataG = new JLabel("Data Gera\u00E7\u00E3o:");
 		panel_11.add(lblDataG, BorderLayout.WEST);
 		
-		textField_8 = new JTextField();
-		panel_11.add(textField_8, BorderLayout.CENTER);
-		textField_8.setColumns(10);
+		data_ger = new JTextField();
+		panel_11.add(data_ger, BorderLayout.CENTER);
+		data_ger.setColumns(10);
 		
 		JPanel panel_12 = new JPanel();
-		panel_12.setBounds(42, 246, 149, 20);
+		panel_12.setBounds(42, 255, 149, 20);
 		panel.add(panel_12);
 		panel_12.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
 		panel_12.add(lblSituao, BorderLayout.WEST);
 		
-		textField_5 = new JComboBox();
-		panel_12.add(textField_5, BorderLayout.CENTER);
-		textField_5.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
+		situacao = new JComboBox();
+		panel_12.add(situacao, BorderLayout.CENTER);
+		situacao.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -238,6 +234,6 @@ public class CadastroItem extends JInternalFrame {
 
 	}
 	public JFormattedTextField getFormattedTextField() {
-		return formattedTextField;
+		return nf;
 	}
 }
