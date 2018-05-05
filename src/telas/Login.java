@@ -11,8 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import db.Conexao;
+import utils.Utils;
 
 public class Login extends JFrame {
 
@@ -84,6 +86,7 @@ public class Login extends JFrame {
 				}
 				if(user == 1) {
 					Menu menu = new Menu(user);
+					gravarAcesso(caixauser.getText());
 					menu.setVisible(true);
 				}
 			}
@@ -95,4 +98,19 @@ public class Login extends JFrame {
 		btnCancelar.setBounds(175, 30, 89, 23);
 		contentPane.add(btnCancelar);
 	}
+	
+	private void gravarAcesso(String username) {
+		//Criar um thread novo, tratar a exception, e executar
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Utils.gravarUltimoAcesso(username);					
+				} catch(IOException e) {
+					System.out.println(e);
+				}
+			}
+		});
+		t.start();
+	}	
 }
