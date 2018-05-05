@@ -87,6 +87,7 @@ public class Login extends JFrame {
 				if(user == 1) {
 					Menu menu = new Menu(user);
 					gravarAcesso(caixauser.getText());
+
 					menu.setVisible(true);
 				}
 			}
@@ -105,7 +106,8 @@ public class Login extends JFrame {
 			@Override
 			public void run() {
 				try {
-					Utils.gravarUltimoAcesso(username);					
+					Utils.gravarUltimoAcesso(username, "ultimo_acesso.txt");
+					Utils.gravarLogAcesso(username, "log_acessos.txt");
 				} catch(IOException e) {
 					System.out.println(e);
 				}
