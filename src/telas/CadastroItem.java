@@ -58,6 +58,8 @@ public class CadastroItem extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroItem() {
+		setClosable(true);
+		setTitle("Cadastro de Patrim\u00F4nio");
 		setRootPaneCheckingEnabled(false);
 		setBounds(100, 100, 552, 352);
 		getContentPane().setLayout(null);
@@ -84,7 +86,7 @@ public class CadastroItem extends JInternalFrame {
 		panel_2.add(btnPesquisar, BorderLayout.EAST);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(56, 30, 251, 20);
+		panel_3.setBounds(59, 30, 176, 20);
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
@@ -96,7 +98,7 @@ public class CadastroItem extends JInternalFrame {
 		nome.setColumns(10);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(59, 55, 194, 20);
+		panel_4.setBounds(60, 55, 175, 20);
 		panel.add(panel_4);
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
@@ -108,7 +110,7 @@ public class CadastroItem extends JInternalFrame {
 		setor.setSelectedIndex(0);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(76, 80, 134, 20);
+		panel_5.setBounds(73, 80, 130, 20);
 		panel.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
@@ -119,7 +121,7 @@ public class CadastroItem extends JInternalFrame {
 		panel_5.add(nf, BorderLayout.CENTER);
 		
 		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(61, 105, 135, 20);
+		panel_6.setBounds(62, 105, 141, 20);
 		panel.add(panel_6);
 		panel_6.setLayout(new BorderLayout(0, 0));
 		
@@ -131,7 +133,7 @@ public class CadastroItem extends JInternalFrame {
 		valor.setColumns(10);
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBounds(16, 130, 251, 20);
+		panel_7.setBounds(27, 130, 176, 20);
 		panel.add(panel_7);
 		panel_7.setLayout(new BorderLayout(0, 0));
 		
@@ -142,7 +144,7 @@ public class CadastroItem extends JInternalFrame {
 		panel_7.add(deprec, BorderLayout.CENTER);
 		
 		JPanel panel_8 = new JPanel();
-		panel_8.setBounds(13, 155, 190, 20);
+		panel_8.setBounds(25, 155, 178, 20);
 		panel.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
@@ -154,7 +156,7 @@ public class CadastroItem extends JInternalFrame {
 		data_compra.setColumns(10);
 		
 		JPanel panel_9 = new JPanel();
-		panel_9.setBounds(22, 180, 243, 20);
+		panel_9.setBounds(31, 180, 204, 20);
 		panel.add(panel_9);
 		panel_9.setLayout(new BorderLayout(0, 0));
 		
@@ -165,7 +167,7 @@ public class CadastroItem extends JInternalFrame {
 		panel_9.add(fornecedor, BorderLayout.CENTER);
 		
 		JPanel panel_10 = new JPanel();
-		panel_10.setBounds(11, 205, 212, 20);
+		panel_10.setBounds(21, 205, 214, 20);
 		panel.add(panel_10);
 		panel_10.setLayout(new BorderLayout(0, 0));
 		
@@ -176,7 +178,7 @@ public class CadastroItem extends JInternalFrame {
 		panel_10.add(usuario, BorderLayout.CENTER);
 		
 		JPanel panel_11 = new JPanel();
-		panel_11.setBounds(12, 230, 189, 20);
+		panel_11.setBounds(20, 230, 183, 20);
 		panel.add(panel_11);
 		panel_11.setLayout(new BorderLayout(0, 0));
 		
@@ -188,7 +190,7 @@ public class CadastroItem extends JInternalFrame {
 		data_ger.setColumns(10);
 		
 		JPanel panel_12 = new JPanel();
-		panel_12.setBounds(42, 255, 149, 20);
+		panel_12.setBounds(45, 255, 158, 20);
 		panel.add(panel_12);
 		panel_12.setLayout(new BorderLayout(0, 0));
 		
