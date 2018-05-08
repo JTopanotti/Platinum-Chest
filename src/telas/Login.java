@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+
 import db.Conexao;
 import utils.Utils;
 
@@ -78,18 +80,15 @@ public class Login extends JFrame {
 		caixapass.setColumns(10);
 		
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int user = check(caixauser.getText(), caixapass.getText());
-				if(user == 0) {
-					JOptionPane.showMessageDialog(null, "Ta loco meu"+user, "Senha Incorreta", JOptionPane.WARNING_MESSAGE);
-				}
-				if(user == 1) {
-					Menu menu = new Menu(user);
-					gravarAcesso(caixauser.getText());
-
-					menu.setVisible(true);
-				}
+		btnEntrar.addActionListener((e) -> {
+			int user = check(caixauser.getText(), caixapass.getText());
+			if(user == 0) {
+				JOptionPane.showMessageDialog(null, "Ta loco meu"+user, "Senha Incorreta", JOptionPane.WARNING_MESSAGE);
+			}
+			if(user == 1) {
+				Menu menu = new Menu(user);
+				gravarAcesso(caixauser.getText());
+				menu.setVisible(true);
 			}
 		});
 		btnEntrar.setBounds(175, 7, 89, 23);

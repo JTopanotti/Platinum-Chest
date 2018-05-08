@@ -1,7 +1,21 @@
 package objetos;
 
-public class Fornecedor {
-	private int cod;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+@Entity
+@Table(name="fornecedor")
+public class Fornecedor implements Serializable {
+
+	//Tem que arrumar os campos dessa classe, pra ficar igual a tabela MySQL,
+	//assim facilitando o processo do Hibernate
+
+	@Id
+	@GeneratedValue
+	private int id;
 	private String nome;
 	private String cnpj;
 	private String ie;
@@ -67,6 +81,7 @@ public class Fornecedor {
 		this.situacao = situacao;
 	}
 	public int getCod() {
-		return cod;
+		return id;
 	}
+	public void setCod(int cod){this.id = cod;}
 }

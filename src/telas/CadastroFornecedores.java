@@ -1,5 +1,8 @@
 package telas;
 
+import dao.FornecedorDAO;
+import objetos.Fornecedor;
+
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
@@ -188,7 +191,7 @@ public class CadastroFornecedores extends JInternalFrame {
 		
 		fornsit = new JComboBox();
 		panel_11.add(fornsit, BorderLayout.CENTER);
-		fornsit.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
+		fornsit.setModel(new DefaultComboBoxModel(new String[] {"0- Ativo", "1- Inativo"}));
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -199,8 +202,11 @@ public class CadastroFornecedores extends JInternalFrame {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		JButton btnAlterar = new JButton("Salvar");
 		btnAlterar.setBounds(10, 11, 95, 23);
+		btnAlterar.addActionListener((e) -> {
+			salvarUsuario();
+		});
 		panel_1.add(btnAlterar);
 		
 		JButton btnNewButton = new JButton("Cancelar");
@@ -220,6 +226,12 @@ public class CadastroFornecedores extends JInternalFrame {
 		panel_1.add(btnSair);
 
 	}
+
+	private void salvarUsuario(){
+		//Falta implementar
+	}
+
+
 	public JFormattedTextField getFormattedTextField() {
 		return forncnpj;
 	}
