@@ -37,9 +37,9 @@ public class Menu extends JFrame {
 	 */
 	public Menu(int user) {
 		setTitle("Platinum Chest");
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		
 		
 		JDesktopPane panel = new JDesktopPane();
 		
@@ -53,6 +53,13 @@ public class Menu extends JFrame {
 		JMenuItem miCadastroFornecedor = new JMenuItem("Cadastro");
 		JMenuItem miConsultaUsuario = new JMenuItem("Consulta");
 		JMenuItem miConsultaProduto = new JMenuItem("Consulta");
+		miConsultaProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConsultaItem consulta = new ConsultaItem();
+				consulta.setVisible(true);
+				panel.add(consulta);
+			}
+		});
 		JMenuItem miConsultaFornecedor = new JMenuItem("Consulta");
 		JMenuItem miMovimentacao = new JMenuItem("Movimenta\u00E7\u00E3o");
 		JMenuItem mntmMovimentaes = new JMenuItem("Movimenta\u00E7\u00F5es");
@@ -65,9 +72,9 @@ public class Menu extends JFrame {
 		setJMenuBar(menuBar);
 		
 		miCadastroProduto.addActionListener((e) -> {
-			CadastroProdutos cadastroProduto = new CadastroProdutos();
-			cadastroProduto.setVisible(true);
-			panel.add(cadastroProduto);
+			CadastroItem cadastroItem = new CadastroItem();
+			cadastroItem.setVisible(true);
+			panel.add(cadastroItem);
 		});
 		miCadastroUsuario.addActionListener((e) -> {
 			CadastroUsuarios cadastroUsuario = new CadastroUsuarios();
@@ -103,6 +110,6 @@ public class Menu extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new CardLayout(0, 0));
+		panel.setLayout(null);
 	}
 }

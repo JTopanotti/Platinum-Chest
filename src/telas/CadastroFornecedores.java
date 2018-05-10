@@ -26,6 +26,7 @@ import javax.swing.DropMode;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
+import javax.swing.border.BevelBorder;
 
 public class CadastroFornecedores extends JInternalFrame {
 	private JTextField fornnome;
@@ -59,22 +60,26 @@ public class CadastroFornecedores extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroFornecedores() {
+		setSelected(true);
+		setClosable(true);
 		setRootPaneCheckingEnabled(false);
 		setBounds(100, 100, 533, 320);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel.setBounds(10, 11, 371, 268);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(23, 6, 330, 20);
-		panel.add(panel_2);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		JPanel panel_13 = new JPanel();
+		panel_13.setBounds(104, 12, 255, 244);
+		panel.add(panel_13);
+		panel_13.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblForn = new JLabel("Fornecedor");
-		panel_2.add(lblForn, BorderLayout.WEST);
+		JPanel panel_2 = new JPanel();
+		panel_13.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		forn = new JTextField();
 		panel_2.add(forn, BorderLayout.CENTER);
@@ -84,117 +89,91 @@ public class CadastroFornecedores extends JInternalFrame {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		panel_2.add(btnPesquisar, BorderLayout.EAST);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(48, 32, 267, 20);
-		panel.add(panel_3);
-		panel_3.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNome = new JLabel("Nome:");
-		panel_3.add(lblNome, BorderLayout.WEST);
-		
 		fornnome = new JTextField();
-		panel_3.add(fornnome, BorderLayout.CENTER);
+		panel_13.add(fornnome);
 		fornnome.setColumns(10);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(48, 58, 185, 20);
-		panel.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblCnpj = new JLabel("CNPJ:");
-		panel_4.add(lblCnpj, BorderLayout.WEST);
-		
 		forncnpj = new JFormattedTextField();
-		panel_4.add(forncnpj, BorderLayout.CENTER);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(65, 84, 168, 20);
-		panel.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblIe = new JLabel("IE:");
-		panel_5.add(lblIe, BorderLayout.WEST);
+		panel_13.add(forncnpj);
 		
 		fornie = new JTextField();
-		panel_5.add(fornie, BorderLayout.CENTER);
+		panel_13.add(fornie);
 		fornie.setColumns(10);
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(32, 110, 305, 20);
-		panel.add(panel_6);
-		panel_6.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblEndereo = new JLabel("Endere\u00E7o:");
-		panel_6.add(lblEndereo, BorderLayout.WEST);
-		
 		fornender = new JTextField();
-		panel_6.add(fornender, BorderLayout.CENTER);
+		panel_13.add(fornender);
 		fornender.setColumns(10);
 		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBounds(46, 136, 216, 20);
-		panel.add(panel_7);
-		panel_7.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblCidade = new JLabel("Cidade:");
-		panel_7.add(lblCidade, BorderLayout.WEST);
-		
 		forncidade = new JTextField();
-		panel_7.add(forncidade, BorderLayout.CENTER);
-		
-		JPanel panel_8 = new JPanel();
-		panel_8.setBounds(45, 162, 155, 20);
-		panel.add(panel_8);
-		panel_8.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblEstado = new JLabel("Estado:");
-		panel_8.add(lblEstado, BorderLayout.WEST);
+		panel_13.add(forncidade);
 		
 		fornestado = new JComboBox();
-		panel_8.add(fornestado, BorderLayout.CENTER);
+		panel_13.add(fornestado);
 		fornestado.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
 		
-		JPanel panel_9 = new JPanel();
-		panel_9.setBounds(35, 188, 188, 20);
-		panel.add(panel_9);
-		panel_9.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblTelefone = new JLabel("Telefone:");
-		panel_9.add(lblTelefone, BorderLayout.WEST);
-		
 		forntelefone = new JTextField();
-		panel_9.add(forntelefone, BorderLayout.CENTER);
+		panel_13.add(forntelefone);
 		forntelefone.setColumns(10);
 		
-		JPanel panel_10 = new JPanel();
-		panel_10.setBounds(55, 214, 204, 20);
-		panel.add(panel_10);
-		panel_10.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblEmail = new JLabel("Email:");
-		panel_10.add(lblEmail, BorderLayout.WEST);
-		
 		fornemail = new JTextField();
-		panel_10.add(fornemail, BorderLayout.CENTER);
+		panel_13.add(fornemail);
 		fornemail.setColumns(10);
 		
-		JPanel panel_11 = new JPanel();
-		panel_11.setBounds(35, 240, 152, 20);
-		panel.add(panel_11);
-		panel_11.setLayout(new BorderLayout(0, 0));
+		fornsit = new JComboBox();
+		panel_13.add(fornsit);
+		fornsit.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
+		
+		JPanel panel_12 = new JPanel();
+		panel_12.setBounds(10, 11, 82, 246);
+		panel.add(panel_12);
+		panel_12.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel lblForn = new JLabel("Fornecedor:");
+		lblForn.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblForn);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblNome);
+		
+		JLabel lblCnpj = new JLabel("CNPJ:");
+		lblCnpj.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblCnpj);
+		
+		JLabel lblIe = new JLabel("IE:");
+		lblIe.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblIe);
+		
+		JLabel lblEndereo = new JLabel("Endere\u00E7o:");
+		lblEndereo.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblEndereo);
+		
+		JLabel lblCidade = new JLabel("Cidade:");
+		lblCidade.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblCidade);
+		
+		JLabel lblEstado = new JLabel("Estado:");
+		lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblEstado);
+		
+		JLabel lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblTelefone);
+		
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblEmail);
 		
 		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
-		panel_11.add(lblSituao, BorderLayout.WEST);
-		
-		fornsit = new JComboBox();
-		panel_11.add(fornsit, BorderLayout.CENTER);
-		fornsit.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
+		lblSituao.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_12.add(lblSituao);
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_1.setBounds(391, 11, 116, 268);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);

@@ -1,3 +1,5 @@
+package telas;
+
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
@@ -13,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.BevelBorder;
 
 public class ConsultaItem extends JInternalFrame {
 	private JTextField textPesquisa;
@@ -44,6 +48,7 @@ public class ConsultaItem extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel.setBounds(10, 11, 414, 23);
 		getContentPane().add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -58,10 +63,16 @@ public class ConsultaItem extends JInternalFrame {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		panel.add(btnPesquisar);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_1.setBounds(4, 237, 426, -185);
+		getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
 		tabelaPatrimonio = new JTable();
+		tabelaPatrimonio.setBounds(6, 16, 414, -207);
+		panel_1.add(tabelaPatrimonio);
 		tabelaPatrimonio.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabelaPatrimonio.setBounds(10, 253, 414, -207);
-		getContentPane().add(tabelaPatrimonio);
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
