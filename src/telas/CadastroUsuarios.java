@@ -1,5 +1,8 @@
 package telas;
 
+import dao.UsuarioDAO;
+import objetos.Usuario;
+
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
@@ -192,8 +195,9 @@ public class CadastroUsuarios extends JInternalFrame {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		JButton btnAlterar = new JButton("Salvar");
 		btnAlterar.setBounds(10, 11, 95, 23);
+		btnAlterar.addActionListener(e -> salvarUsuario());
 		panel_1.add(btnAlterar);
 		
 		JButton btnNewButton = new JButton("Cancelar");
@@ -211,6 +215,21 @@ public class CadastroUsuarios extends JInternalFrame {
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(10, 146, 95, 23);
 		panel_1.add(btnSair);
+
+	}
+
+	private void salvarUsuario(){
+		Usuario user = new Usuario();
+		user.setNome(nome.getText());
+		user.setCidade(cidade.getText());
+		user.setCpf(Integer.parseInt(cpf.getText()));
+		user.setEmail(email.getText());
+		user.setEndereco(endereco.getText());
+		user.setEstado((String)estado.getSelectedItem());
+		user.setSituacao(situacao.getSelectedIndex());
+		user.setTelefone(Integer.parseInt(telefone.getText()));
+		user.setUsuario(usuario.getText());
+		new UsuarioDAO().salvarUsuario(user);
 
 	}
 	public JFormattedTextField getFormattedTextField() {

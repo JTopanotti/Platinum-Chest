@@ -204,9 +204,7 @@ public class CadastroFornecedores extends JInternalFrame {
 		
 		JButton btnAlterar = new JButton("Salvar");
 		btnAlterar.setBounds(10, 11, 95, 23);
-		btnAlterar.addActionListener((e) -> {
-			salvarUsuario();
-		});
+		btnAlterar.addActionListener((e) -> salvarUsuario());
 		panel_1.add(btnAlterar);
 		
 		JButton btnNewButton = new JButton("Cancelar");
@@ -228,7 +226,17 @@ public class CadastroFornecedores extends JInternalFrame {
 	}
 
 	private void salvarUsuario(){
-		//Falta implementar
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setCnpj(Integer.parseInt(forncnpj.getText()));
+		fornecedor.setIe(Integer.parseInt(fornie.getText()));
+		fornecedor.setEndereco(fornender.getText());
+		fornecedor.setEstado((String) fornestado.getSelectedItem());
+		fornecedor.setTelefone(Integer.parseInt(forntelefone.getText()));
+		fornecedor.setSituacao(fornsit.getSelectedIndex());
+		fornecedor.setEmail(fornemail.getText());
+		fornecedor.setCidade(forncidade.getText());
+		fornecedor.setNome(fornnome.getText());
+		new FornecedorDAO().salvarFornecedor(fornecedor);
 	}
 
 

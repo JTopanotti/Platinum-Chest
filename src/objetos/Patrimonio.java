@@ -1,31 +1,57 @@
 package objetos;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "patrimonio")
 public class Patrimonio {
-	
-	private int cod;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private int id;
 	private String nome;
-	private int setor;
+	private String setor;
 	private float valor;
 	private int nf;
-	private Date data_compra;
+	@Column(name = "id_fornecedor", nullable = false)
 	private int fornecedor;
 	private int depreciacao;
-	private Date data_geracao;
 	private int situacao;
+	@Column(name = "id_usuario", nullable = false)
 	private int usuario;
-	
+	@Temporal(TemporalType.DATE)
+	private Date data_geracao;
+	@Temporal(TemporalType.DATE)
+	private Date data_compra;
+
+
+	public void setUsuario(int id){
+		this.usuario = id;
+	}
+
+	public void setData_compra(Date data){
+		this.data_compra = data;
+	}
+
+	public void setData_geracao(Date data){
+		this.data_geracao = data;
+	}
+
+	public void setFornecedor(int id){
+		this.fornecedor = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getSetor() {
+	public String getSetor() {
 		return setor;
 	}
-	public void setSetor(int setor) {
+	public void setSetor(String setor) {
 		this.setor = setor;
 	}
 	public float getValor() {
@@ -40,9 +66,17 @@ public class Patrimonio {
 	public void setSituacao(int situacao) {
 		this.situacao = situacao;
 	}
-	public int getCod() {
-		return cod;
+	public int getId() { return id; }
+	public void setId(int id){this.id = id;}
+
+	public void setNf(int nf){
+		this.nf = nf;
 	}
+
+	public void setDepreciacao(int depreciacao) {
+		this.depreciacao = depreciacao;
+	}
+
 	public int getNf() {
 		return nf;
 	}

@@ -56,8 +56,6 @@ public class Menu extends JFrame {
 		JMenuItem miConsultaFornecedor = new JMenuItem("Consulta");
 		JMenuItem miMovimentacao = new JMenuItem("Movimenta\u00E7\u00E3o");
 		JMenuItem mntmMovimentaes = new JMenuItem("Movimenta\u00E7\u00F5es");
-		JMenuItem mntmSetores = new JMenuItem("Setores");
-		JMenuItem mntmSetores_1 = new JMenuItem("Setores");
 		JMenuItem mntmProdutos = new JMenuItem("Produtos");
 		JMenu mnSobre = new JMenu("Sobre");
 		
@@ -65,9 +63,9 @@ public class Menu extends JFrame {
 		setJMenuBar(menuBar);
 		
 		miCadastroProduto.addActionListener((e) -> {
-			CadastroProdutos cadastroProduto = new CadastroProdutos();
-			cadastroProduto.setVisible(true);
-			panel.add(cadastroProduto);
+			CadastroItem cadastroItem = new CadastroItem();
+			cadastroItem.setVisible(true);
+			panel.add(cadastroItem);
 		});
 		miCadastroUsuario.addActionListener((e) -> {
 			CadastroUsuarios cadastroUsuario = new CadastroUsuarios();
@@ -79,6 +77,12 @@ public class Menu extends JFrame {
 				= new CadastroFornecedores();
 			cadastroFornecedor.setVisible(true);
 			panel.add(cadastroFornecedor);
+		});
+
+		miConsultaProduto.addActionListener((e) -> {
+			ConsultaItem consultaItem = new ConsultaItem();
+			consultaItem.setVisible(true);
+			panel.add(consultaItem);
 		});
 		
 		menuBar.add(mnCadastro);
@@ -92,11 +96,9 @@ public class Menu extends JFrame {
 		mnCadastro.add(mnFornecedores);
 		mnFornecedores.add(miCadastroFornecedor);
 		mnFornecedores.add(miConsultaFornecedor);
-		mnCadastro.add(mntmSetores);
 		menuBar.add(mnRelatrios);
 		mnRelatrios.add(mntmProdutos);
 		mnRelatrios.add(mntmMovimentaes);
-		mnRelatrios.add(mntmSetores_1);
 		menuBar.add(mnSobre);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

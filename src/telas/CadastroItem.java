@@ -1,16 +1,21 @@
 package telas;
 
-import java.awt.EventQueue;
+import dao.FornecedorDAO;
+import dao.PatrimonioDAO;
+import dao.UsuarioDAO;
+import objetos.Fornecedor;
+import objetos.Patrimonio;
+import objetos.Usuario;
+import org.hibernate.Session;
+
+import java.awt.*;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
-import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
@@ -25,6 +30,10 @@ import javax.swing.JFormattedTextField;
 import javax.swing.DropMode;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class CadastroItem extends JInternalFrame {
 	private JTextField nome;
@@ -34,9 +43,10 @@ public class CadastroItem extends JInternalFrame {
 	private JTextField deprec;
 	private JComboBox situacao;
 	private JComboBox fornecedor;
+	private JComboBox setor;
 	private JComboBox usuario;
-	private JTextField data_compra;
-	private JTextField data_ger;
+	private JFormattedTextField data_compra;
+	private JFormattedTextField data_ger;
 
 	/**
 	 * Launch the application.
@@ -58,9 +68,12 @@ public class CadastroItem extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroItem() {
+
+
 		setRootPaneCheckingEnabled(false);
 		setBounds(100, 100, 552, 352);
 		getContentPane().setLayout(null);
+		DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 371, 290);
@@ -103,7 +116,8 @@ public class CadastroItem extends JInternalFrame {
 		JLabel Setor = new JLabel("Setor:");
 		panel_4.add(Setor, BorderLayout.WEST);
 		
-		JComboBox setor = new JComboBox();
+		setor = new JComboBox();
+		setor.setModel(new DefaultComboBoxModel(new String[] {"FIN", "RH", "TI", "COM", "PROD"}));
 		panel_4.add(setor, BorderLayout.CENTER);
 		setor.setSelectedIndex(0);
 		
@@ -148,8 +162,8 @@ public class CadastroItem extends JInternalFrame {
 		
 		JLabel lblDataC = new JLabel("Data compra:");
 		panel_8.add(lblDataC, BorderLayout.WEST);
-		
-		data_compra = new JTextField();
+
+		data_compra = new JFormattedTextField(df);
 		panel_8.add(data_compra, BorderLayout.CENTER);
 		data_compra.setColumns(10);
 		
@@ -162,6 +176,9 @@ public class CadastroItem extends JInternalFrame {
 		panel_9.add(lblForn, BorderLayout.WEST);
 		
 		fornecedor = new JComboBox();
+
+		List<Fornecedor> fornecedores = new FornecedorDAO().getFornecedores();
+		fornecedor.setModel(new DefaultComboBoxModel(fornecedores.toArray()));
 		panel_9.add(fornecedor, BorderLayout.CENTER);
 		
 		JPanel panel_10 = new JPanel();
@@ -171,8 +188,10 @@ public class CadastroItem extends JInternalFrame {
 		
 		JLabel lblEmail = new JLabel("Usu. Gera\u00E7\u00E3o:");
 		panel_10.add(lblEmail, BorderLayout.WEST);
-		
+
+		List<Usuario> usuarios = new UsuarioDAO().getUsuarios();
 		usuario = new JComboBox();
+		usuario.setModel(new DefaultComboBoxModel(usuarios.toArray()));
 		panel_10.add(usuario, BorderLayout.CENTER);
 		
 		JPanel panel_11 = new JPanel();
@@ -183,7 +202,7 @@ public class CadastroItem extends JInternalFrame {
 		JLabel lblDataG = new JLabel("Data Gera\u00E7\u00E3o:");
 		panel_11.add(lblDataG, BorderLayout.WEST);
 		
-		data_ger = new JTextField();
+		data_ger = new JFormattedTextField(df);
 		panel_11.add(data_ger, BorderLayout.CENTER);
 		data_ger.setColumns(10);
 		
@@ -198,18 +217,16 @@ public class CadastroItem extends JInternalFrame {
 		situacao = new JComboBox();
 		panel_12.add(situacao, BorderLayout.CENTER);
 		situacao.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(391, 11, 135, 290);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		JButton btnAlterar = new JButton("Salvar");
 		btnAlterar.setBounds(10, 11, 115, 23);
+		btnAlterar.addActionListener(e -> salvarPatrimonio());
 		panel_1.add(btnAlterar);
 		
 		JButton btnNewButton = new JButton("Cancelar");
@@ -233,6 +250,22 @@ public class CadastroItem extends JInternalFrame {
 		panel_1.add(btnMovimentao);
 
 	}
+
+	private void salvarPatrimonio(){
+		Patrimonio pat = new Patrimonio();
+		pat.setNome(nome.getText());
+		pat.setSetor((String)setor.getSelectedItem());
+		pat.setSituacao(situacao.getSelectedIndex());
+		float valor_f = valor.getText().isEmpty() ? new Float(0):
+				Float.parseFloat(valor.getText());
+		pat.setValor(valor_f);
+		pat.setFornecedor(((Fornecedor)fornecedor.getSelectedItem()).getId());
+		pat.setUsuario(((Usuario)usuario.getSelectedItem()).getId());
+		pat.setData_compra(new Date(data_compra.getText()));
+		pat.setData_geracao(new Date(data_ger.getText()));
+		new PatrimonioDAO().salvarPatrimonio(pat);
+	}
+
 	public JFormattedTextField getFormattedTextField() {
 		return nf;
 	}

@@ -1,43 +1,41 @@
 package objetos;
 
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "usuario")
 public class Usuario{
-	
-	 private int cod;
-	
-	 private int nome;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	 private int id;
+	 private String nome;
      private String usuario;
-
      private int cpf;
-
      private String endereco;
-
      private String cidade;
-
      private String estado;
-     
-	 private String situacao;
-
+	 private int situacao;
      private int telefone;
-     
      private String email;
      
      
 
-	public int getCod() {
-		return cod;
+	public int getId() {
+		return id;
 	}
 
-	public void setCod(int cod) {
-		this.cod = cod;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(int nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -81,13 +79,11 @@ public class Usuario{
 		this.estado = estado;
 	}
 
-	public String getSituacao() {
+	public int getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
+	public void setSituacao(int situacao) { this.situacao = situacao; }
 
 	public int getTelefone() {
 		return telefone;
@@ -105,5 +101,8 @@ public class Usuario{
 		this.email = email;
 	}
 
-	
+	@Override
+	public String toString() {
+		return getNome();
+	}
 }

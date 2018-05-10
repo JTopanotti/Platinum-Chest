@@ -1,48 +1,44 @@
 package dao;
 
 import db.SessionCreator;
-import objetos.Fornecedor;
-import objetos.Usuario;
+import objetos.Patrimonio;
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+public class PatrimonioDAO {
 
-public class FornecedorDAO {
-
-    public List<Fornecedor> getFornecedores(){
+    public List<Patrimonio> getPatrimonios(){
         Session session = SessionCreator.getSession();
-        List<Fornecedor> fornecedores = session.createCriteria(Fornecedor.class).list();
-        session.close();
-        return fornecedores;
+        return session.createCriteria(Patrimonio.class).list();
     }
 
-    public Fornecedor getFornecedorPorId(int id){
+    public Patrimonio getPatrimonioPorId(int id){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
         EntityManager em = factory.createEntityManager();
-        Fornecedor forn = em.find(Fornecedor.class, id);
-        System.out.println(forn.getNome());
+        Patrimonio pat = em.find(Patrimonio.class, id);
         em.flush();
         em.close();
         factory.close();
-        return forn;
+        return pat;
     }
 
-    public boolean salvarFornecedor(Fornecedor forn){
+    public boolean salvarPatrimonio(Patrimonio pat){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
-        em.persist(forn);
+        em.persist(pat);
         em.getTransaction().commit();
-        System.out.println("Fornecedor cadastrado: " + forn.getId() + ", Nome: " + forn.getNome());
+        System.out.println("Patrimonio cadastrado: " + pat.getId() + ", Nome: " + pat.getNome());
         em.close();
         factory.close();
         return true;
     }
-
 }
