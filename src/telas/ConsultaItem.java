@@ -75,8 +75,29 @@ public class ConsultaItem extends JInternalFrame {
 		tabelaPatrimonio.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				pesquisar();
 			}
 		});
 
+	}
+
+	private void pesquisar(){
+		List<Patrimonio> patrimonios = new PatrimonioDAO().getPatrimonios();
+		if(!textPesquisa.getText().isEmpty()){
+			patrimonios = patrimonios.stream().filter(patrimonio ->
+					patrimonio.getNome().contains(textPesquisa.getText()))
+					.collect(Collectors.toList());
+		}
+		System.out.println(patrimonios);
+		DefaultTableModel model =
+				new DefaultTableModel(new String[]{"ID", "NOME"}, 0);
+		Iterator it = patrimonios.iterator();
+		while (it.hasNext()){
+			Patrimonio next = (Patrimonio) it.next();
+			model.addRow(new Object[]{next.getId(), next.getNome()});
+		}
+		tabelaPatrimonio.setModel(model);
+		tabelaPatrimonio.setVisible(true);
+		this.setVisible(true);
 	}
 }

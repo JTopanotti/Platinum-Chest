@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "objetos.Patrimonio" table = "patrimonio">
+
+        <meta attribute = "class-description">
+            Contem as info de patrimonio.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name="nome" column="nome" type="string" />
+        <property name="setor" column="setor" type="string" />
+        <property name="valor" column="valor" type="float" />
+        <property name="nf" column="nf" type="int" />
+        <property name="fornecedor" column="id_fornecedor" type="int" />
+        <property name="depreciacao" column="depreciacao" type="int" />
+        <property name="situacao" column="situacao" type="int" />
+        <property name="usuario" column="id_usuario" type="int" />
+        <property name="data_geracao" column="data_geracao" type="date" />
+        <property name="data_compra" column="data_compra" type="date" />
+
+
+    </class>
+</hibernate-mapping>

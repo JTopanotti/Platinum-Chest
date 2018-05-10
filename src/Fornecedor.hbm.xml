@@ -1,0 +1,28 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "objetos.Fornecedor" table = "fornecedor">
+
+        <meta attribute = "class-description">
+            Contem as info de fornecedor.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name="nome" column="nome" type="string" />
+        <property name="cnpj" column="cnpj" type="int" />
+        <property name="ie" column="ie" type="int" />
+        <property name="endereco" column="endereco" type="string" />
+        <property name="cidade" column="cidade" type="string" />
+        <property name="estado" column="estado" type="string" />
+        <property name="situacao" column="id_situacao" type="int" />
+        <property name="telefone" column="telefone" type="int" />
+        <property name="email" column="email" type="string" />
+
+    </class>
+</hibernate-mapping>

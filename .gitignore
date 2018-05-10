@@ -4,3 +4,5 @@ bin/
 .idea/
 out/
 *.iml
+target/
+*.txt

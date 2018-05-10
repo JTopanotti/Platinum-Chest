@@ -66,22 +66,22 @@ public class Login extends JFrame {
 		panel_2.setBounds(10, 7, 254, 46);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
-		
+
 		JPanel panel_4 = new JPanel();
 		panel_4.setBounds(0, 1, 142, 43);
 		panel_2.add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
-		
+
 		JPanel panel = new JPanel();
 		panel_4.add(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 5));
-		
+
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
 		panel.add(lblUsurio);
-		
+
 		JLabel lblSenha = new JLabel("Senha:");
 		panel.add(lblSenha);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_4.add(panel_1);
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
@@ -98,20 +98,8 @@ public class Login extends JFrame {
 		panel_3.setBounds(165, 0, 89, 46);
 		panel_2.add(panel_3);
 		panel_3.setLayout(null);
-		
+
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(0, 0, 89, 23);
-		panel_3.add(btnEntrar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		
-		btnCancelar.setBounds(0, 23, 89, 23);
-		panel_3.add(btnCancelar);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int user = check(caixauser.getText(), caixapass.getText());
@@ -121,8 +109,8 @@ public class Login extends JFrame {
 				if(user == 1) {
 					Menu menu = new Menu(user);
 					gravarAcesso(caixauser.getText());
+
 					menu.setVisible(true);
-					dispose();
 				}
 			}
 		});
