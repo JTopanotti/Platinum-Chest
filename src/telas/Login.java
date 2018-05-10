@@ -15,12 +15,15 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import db.Conexao;
 import utils.Utils;
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField caixauser;
-	private JTextField caixapass;
+	private JPasswordField caixapass;
 	/**
 	 * Launch the application.
 	 */
@@ -59,25 +62,56 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
-		lblUsurio.setBounds(10, 11, 40, 14);
-		contentPane.add(lblUsurio);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(10, 7, 254, 46);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
 		
-		caixauser = new JTextField();
-		caixauser.setBounds(66, 8, 86, 20);
-		contentPane.add(caixauser);
-		caixauser.setColumns(10);
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(0, 1, 142, 43);
+		panel_2.add(panel_4);
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
+		
+		JPanel panel = new JPanel();
+		panel_4.add(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 5));
+		
+		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
+		panel.add(lblUsurio);
 		
 		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setBounds(16, 34, 34, 14);
-		contentPane.add(lblSenha);
+		panel.add(lblSenha);
 		
-		caixapass = new JTextField();
-		caixapass.setBounds(66, 31, 86, 20);
-		contentPane.add(caixapass);
+		JPanel panel_1 = new JPanel();
+		panel_4.add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		caixauser = new JTextField();
+		panel_1.add(caixauser);
+		caixauser.setColumns(10);
+		
+		caixapass = new JPasswordField();
+		panel_1.add(caixapass);
 		caixapass.setColumns(10);
 		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(165, 0, 89, 46);
+		panel_2.add(panel_3);
+		panel_3.setLayout(null);
+		
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.setBounds(0, 0, 89, 23);
+		panel_3.add(btnEntrar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		
+		btnCancelar.setBounds(0, 23, 89, 23);
+		panel_3.add(btnCancelar);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int user = check(caixauser.getText(), caixapass.getText());
@@ -87,17 +121,11 @@ public class Login extends JFrame {
 				if(user == 1) {
 					Menu menu = new Menu(user);
 					gravarAcesso(caixauser.getText());
-
 					menu.setVisible(true);
+					dispose();
 				}
 			}
 		});
-		btnEntrar.setBounds(175, 7, 89, 23);
-		contentPane.add(btnEntrar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(175, 30, 89, 23);
-		contentPane.add(btnCancelar);
 	}
 	
 	private void gravarAcesso(String username) {
