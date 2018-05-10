@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
 
+import dao.UsuarioDAO;
 import db.Conexao;
 import utils.Utils;
 
@@ -81,12 +82,11 @@ public class Login extends JFrame {
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener((e) -> {
-			int user = check(caixauser.getText(), caixapass.getText());
-			if(user == 0) {
-				JOptionPane.showMessageDialog(null, "Ta loco meu"+user, "Senha Incorreta", JOptionPane.WARNING_MESSAGE);
-			}
-			if(user == 1) {
-				Menu menu = new Menu(user);
+			boolean check = verificarAcesso(caixauser.getText(), caixapass.getText());
+			if(!check) {
+				JOptionPane.showMessageDialog(null, "Usuário ou senha inválido ", "Credenciais inválidos", JOptionPane.WARNING_MESSAGE);
+			} else {
+				Menu menu = new Menu();
 				gravarAcesso(caixauser.getText());
 				menu.setVisible(true);
 			}
@@ -97,6 +97,17 @@ public class Login extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(175, 30, 89, 23);
 		contentPane.add(btnCancelar);
+	}
+
+	private boolean verificarAcesso(String username, String password){
+		boolean check = false;
+		if(username.isEmpty() || password.isEmpty()) return check;
+		String credencial = new UsuarioDAO().getCredenciais(username);
+		if(credencial == null) check = false;
+		else if(credencial.equals(password)) check = true;
+		return check;
+
+
 	}
 	
 	private void gravarAcesso(String username) {

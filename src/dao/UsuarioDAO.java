@@ -1,5 +1,6 @@
 package dao;
 
+import db.Conexao;
 import db.SessionCreator;
 import objetos.Fornecedor;
 import objetos.Usuario;
@@ -14,7 +15,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class UsuarioDAO {
@@ -36,6 +39,27 @@ public class UsuarioDAO {
         em.close();
         factory.close();
         return true;
+    }
+
+    public String getCredenciais(String username){
+        Connection conexao = null;
+        String senha = null;
+        try{
+            conexao = Conexao.getConexao();
+            Statement statement = conexao.createStatement();
+            String query = "select senha from usuario where usuario = \"" + username +  "\"";
+            ResultSet rs = statement.executeQuery(query);
+            if(rs.next()){
+                senha = rs.getString("senha");
+            }
+            conexao.close();
+            rs.close();
+            statement.close();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return senha;
     }
 
 }
