@@ -1,6 +1,5 @@
 package telas;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,10 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
-import db.Conexao;
+
+import dao.UsuarioDAO;
 import utils.Utils;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
@@ -100,35 +98,46 @@ public class Login extends JFrame {
 		panel_3.setLayout(null);
 
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int user = check(caixauser.getText(), caixapass.getText());
-				if(user == 0) {
-					JOptionPane.showMessageDialog(null, "Ta loco meu"+user, "Senha Incorreta", JOptionPane.WARNING_MESSAGE);
-				}
-				if(user == 1) {
-					Menu menu = new Menu(user);
-					gravarAcesso(caixauser.getText());
+		btnEntrar.addActionListener(e -> {
+            boolean valido = verificarAcesso();
+            if(!valido) {
+                JOptionPane.showMessageDialog(null, "Usuário ou senha inválido", "Credenciais inválidos", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Menu menu = new Menu();
+                gravarAcesso(caixauser.getText());
+                menu.setVisible(true);
+            }
+        });
+		btnEntrar.setBounds(0, 0, 89, 23);
+		panel_3.add(btnEntrar);
 
-					menu.setVisible(true);
-				}
-			}
-		});
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(0, 23, 89, 23);
+		panel_3.add(btnCancelar);
+	}
+
+	private boolean verificarAcesso(){
+		String username = caixauser.getText();
+		String password = caixapass.getText();
+		if(username.isEmpty() || password.isEmpty())
+			return false;
+		else {
+			String credencial = new UsuarioDAO().getCredenciais(username);
+			if(credencial == null) return false;
+			else return password.equals(credencial);
+		}
 	}
 	
 	private void gravarAcesso(String username) {
 		//Criar um thread novo, tratar a exception, e executar
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Utils.gravarUltimoAcesso(username, "ultimo_acesso.txt");
-					Utils.gravarLogAcesso(username, "log_acessos.txt");
-				} catch(IOException e) {
-					System.out.println(e);
-				}
-			}
-		});
+		Thread t = new Thread(() -> {
+            try {
+                Utils.gravarUltimoAcesso(username, "ultimo_acesso.txt");
+                Utils.gravarLogAcesso(username, "log_acessos.txt");
+            } catch(IOException e) {
+                System.out.println(e);
+            }
+        });
 		t.start();
 	}	
 }

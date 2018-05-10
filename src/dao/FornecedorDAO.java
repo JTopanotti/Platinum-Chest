@@ -1,15 +1,17 @@
 package dao;
 
+import db.Conexao;
 import db.SessionCreator;
 import objetos.Fornecedor;
-import objetos.Usuario;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,6 +21,33 @@ public class FornecedorDAO {
         Session session = SessionCreator.getSession();
         List<Fornecedor> fornecedores = session.createCriteria(Fornecedor.class).list();
         session.close();
+        return fornecedores;
+    }
+
+    public ArrayList<Fornecedor> getFornecedoresPorNome(String nome){
+        ArrayList<Fornecedor> fornecedores = null;
+        if(nome.isEmpty() || nome == null){
+            Session session = SessionCreator.getSession();
+            fornecedores = new ArrayList<>(session.createCriteria(Fornecedor.class).list());
+        } else {
+            try {
+                Connection conexao = Conexao.getConexao();
+                String query_string =
+                        "select id, nome from fornecedor where nome like \"%" + nome + "%\";";
+                System.out.println(query_string);
+                ResultSet rs = conexao.createStatement().executeQuery(query_string);
+                fornecedores = new ArrayList<>();
+                while(rs.next()){
+                    Fornecedor fornecedor = new Fornecedor();
+                    fornecedor.setId(rs.getInt("id"));
+                    fornecedor.setNome(rs.getString("nome"));
+                    fornecedores.add(fornecedor);
+                }
+
+            } catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
         return fornecedores;
     }
 

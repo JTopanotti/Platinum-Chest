@@ -1,41 +1,33 @@
 package telas;
 
+import dao.PatrimonioDAO;
+import objetos.Patrimonio;
+
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JTable;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.TitledBorder;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class ConsultaItem extends JInternalFrame {
 	private JTextField textPesquisa;
-	private JTable tabelaPatrimonio;
+	private JTable tabela;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConsultaItem frame = new ConsultaItem();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		EventQueue.invokeLater(() -> {
+            try {
+                ConsultaItem frame = new ConsultaItem();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 	}
 
 	/**
@@ -44,60 +36,50 @@ public class ConsultaItem extends JInternalFrame {
 	public ConsultaItem() {
 		setRootPaneCheckingEnabled(false);
 		setClosable(true);
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(new BorderLayout());
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBounds(10, 11, 414, 23);
-		getContentPane().add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		
+		panel.setLayout(new BorderLayout());
 		JLabel lblNome = new JLabel("Nome:");
-		panel.add(lblNome);
-		
+		panel.add(lblNome, BorderLayout.WEST);
 		textPesquisa = new JTextField();
-		panel.add(textPesquisa);
+		panel.add(textPesquisa, BorderLayout.CENTER);
 		textPesquisa.setColumns(10);
-		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		panel.add(btnPesquisar);
+		panel.add(btnPesquisar, BorderLayout.EAST);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_1.setBounds(4, 237, 426, -185);
-		getContentPane().add(panel_1);
-		panel_1.setLayout(null);
-		
-		tabelaPatrimonio = new JTable();
-		tabelaPatrimonio.setBounds(6, 16, 414, -207);
-		panel_1.add(tabelaPatrimonio);
-		tabelaPatrimonio.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				pesquisar();
-			}
-		});
+		panel_1.setLayout(new BorderLayout());
+		tabela = new JTable();
+		panel_1.add(new JScrollPane(tabela), BorderLayout.CENTER);
+		tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		btnPesquisar.addActionListener(arg0 -> pesquisar());
+
+		JPanel panelPrincipal = new JPanel();
+		panelPrincipal.setLayout(new BorderLayout());
+		panelPrincipal.add(panel, BorderLayout.NORTH);
+		panelPrincipal.add(panel_1, BorderLayout.SOUTH);
+
+		getContentPane().add(panelPrincipal, BorderLayout.CENTER);
+		this.pack();
+		this.setVisible(true);
 
 	}
 
 	private void pesquisar(){
-		List<Patrimonio> patrimonios = new PatrimonioDAO().getPatrimonios();
-		if(!textPesquisa.getText().isEmpty()){
-			patrimonios = patrimonios.stream().filter(patrimonio ->
-					patrimonio.getNome().contains(textPesquisa.getText()))
-					.collect(Collectors.toList());
-		}
-		System.out.println(patrimonios);
+		ArrayList<Patrimonio> patrimonios =
+				new PatrimonioDAO().getPatrimoniosPorNome(textPesquisa.getText());
+		System.out.println(patrimonios.size());
 		DefaultTableModel model =
-				new DefaultTableModel(new String[]{"ID", "NOME"}, 0);
+				new DefaultTableModel(new String[]{"ID", "NOME", "VALOR", "DATA GERACAO"}, 0);
 		Iterator it = patrimonios.iterator();
 		while (it.hasNext()){
 			Patrimonio next = (Patrimonio) it.next();
-			model.addRow(new Object[]{next.getId(), next.getNome()});
+			model.addRow(new Object[]{next.getId(), next.getNome(),
+					next.getValor(), next.getData_geracao()});
 		}
-		tabelaPatrimonio.setModel(model);
-		tabelaPatrimonio.setVisible(true);
-		this.setVisible(true);
+		tabela.setModel(model);
 	}
 }

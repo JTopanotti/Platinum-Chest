@@ -20,7 +20,7 @@
         <property name="endereco" column="endereco" type="string" />
         <property name="cidade" column="cidade" type="string" />
         <property name="estado" column="estado" type="string" />
-        <property name="situacao" column="id_situacao" type="int" />
+        <property name="situacao" column="situacao" type="int" />
         <property name="telefone" column="telefone" type="int" />
         <property name="email" column="email" type="string" />
 

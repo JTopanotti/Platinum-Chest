@@ -2,14 +2,8 @@ package dao;
 
 import db.Conexao;
 import db.SessionCreator;
-import objetos.Fornecedor;
 import objetos.Usuario;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.jdbc.Work;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {
@@ -26,6 +21,33 @@ public class UsuarioDAO {
         Session session = SessionCreator.getSession();
         List<Usuario> usuarios = session.createCriteria(Usuario.class).list();
         session.close();
+        return usuarios;
+    }
+
+    public ArrayList<Usuario> getUsuariosPorNome(String nome){
+        ArrayList<Usuario> usuarios = null;
+        if(nome.isEmpty() || nome == null){
+            Session session = SessionCreator.getSession();
+            usuarios = new ArrayList<>(session.createCriteria(Usuario.class).list());
+        } else {
+            try {
+                Connection conexao = Conexao.getConexao();
+                String query_string =
+                        "select id, nome from usuario where nome like \"%" + nome + "%\";";
+                System.out.println(query_string);
+                ResultSet rs = conexao.createStatement().executeQuery(query_string);
+                usuarios = new ArrayList<>();
+                while(rs.next()){
+                    Usuario usuario = new Usuario();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuarios.add(usuario);
+                }
+
+            } catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
         return usuarios;
     }
 
@@ -42,7 +64,7 @@ public class UsuarioDAO {
     }
 
     public String getCredenciais(String username){
-        Connection conexao = null;
+        Connection conexao;
         String senha = null;
         try{
             conexao = Conexao.getConexao();

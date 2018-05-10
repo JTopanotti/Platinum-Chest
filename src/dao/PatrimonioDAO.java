@@ -1,23 +1,47 @@
 package dao;
 
+import db.Conexao;
 import db.SessionCreator;
 import objetos.Patrimonio;
-import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class PatrimonioDAO {
 
-    public List<Patrimonio> getPatrimonios(){
-        Session session = SessionCreator.getSession();
-        return session.createCriteria(Patrimonio.class).list();
+    public ArrayList<Patrimonio> getPatrimoniosPorNome(String nome){
+        ArrayList<Patrimonio> patrimonios = null;
+        if(nome.isEmpty() || nome == null){
+            Session session = SessionCreator.getSession();
+            patrimonios = new ArrayList<>(session.createCriteria(Patrimonio.class).list());
+        } else {
+            try {
+                Connection conexao = Conexao.getConexao();
+                String query_string =
+                        "select id, nome, valor, data_geracao from patrimonio where nome like \"%" + nome + "%\";";
+                System.out.println(query_string);
+                ResultSet rs = conexao.createStatement().executeQuery(query_string);
+                patrimonios = new ArrayList<>();
+                while(rs.next()){
+                    Patrimonio patrimonio = new Patrimonio();
+                    patrimonio.setId(rs.getInt("id"));
+                    patrimonio.setNome(rs.getString("nome"));
+                    patrimonio.setValor(rs.getFloat("valor"));
+                    patrimonio.setData_geracao(rs.getDate("data_geracao"));
+                    patrimonios.add(patrimonio);
+                }
+
+            } catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return patrimonios;
     }
 
     public Patrimonio getPatrimonioPorId(int id){

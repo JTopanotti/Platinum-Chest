@@ -5,30 +5,11 @@ import objetos.Fornecedor;
 
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.text.MaskFormatter;
-import javax.swing.JTextField;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 import java.awt.GridLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JToggleButton;
-import javax.swing.JList;
-import javax.swing.JSpinner;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFormattedTextField;
-import javax.swing.DropMode;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.CardLayout;
 import java.beans.PropertyVetoException;
 import javax.swing.border.BevelBorder;
 
@@ -221,10 +202,6 @@ public class CadastroFornecedores extends JInternalFrame {
 		fornecedor.setCidade(forncidade.getText());
 		fornecedor.setNome(fornnome.getText());
 		new FornecedorDAO().salvarFornecedor(fornecedor);
-	}
-
-
-	public JFormattedTextField getFormattedTextField() {
-		return forncnpj;
+		JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

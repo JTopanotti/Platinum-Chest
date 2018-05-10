@@ -1,32 +1,14 @@
 package telas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.DesktopPaneUI;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JDesktopPane;
-import java.awt.Color;
-import java.awt.Desktop;
-
-import javax.swing.UIManager;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import java.awt.Component;
-import javax.swing.border.BevelBorder;
-import java.awt.ComponentOrientation;
-import java.awt.Cursor;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 
 public class Menu extends JFrame {
 
@@ -53,13 +35,6 @@ public class Menu extends JFrame {
 		JMenuItem miCadastroFornecedor = new JMenuItem("Cadastro");
 		JMenuItem miConsultaUsuario = new JMenuItem("Consulta");
 		JMenuItem miConsultaProduto = new JMenuItem("Consulta");
-		miConsultaProduto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ConsultaItem consulta = new ConsultaItem();
-				consulta.setVisible(true);
-				panel.add(consulta);
-			}
-		});
 		JMenuItem miConsultaFornecedor = new JMenuItem("Consulta");
 		JMenuItem miMovimentacao = new JMenuItem("Movimenta\u00E7\u00E3o");
 		JMenuItem mntmMovimentaes = new JMenuItem("Movimenta\u00E7\u00F5es");
@@ -90,6 +65,18 @@ public class Menu extends JFrame {
 			ConsultaItem consultaItem = new ConsultaItem();
 			consultaItem.setVisible(true);
 			panel.add(consultaItem);
+		});
+
+		miConsultaFornecedor.addActionListener((e) -> {
+			ConsultaFornecedor consultaFornecedor = new ConsultaFornecedor();
+			consultaFornecedor.setVisible(true);
+			panel.add(consultaFornecedor);
+		});
+
+		miConsultaUsuario.addActionListener((e) -> {
+			ConsultaUsuario consultaUsuario = new ConsultaUsuario();
+			consultaUsuario.setVisible(true);
+			panel.add(consultaUsuario);
 		});
 		
 		menuBar.add(mnCadastro);

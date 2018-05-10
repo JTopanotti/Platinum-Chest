@@ -22,7 +22,6 @@ public class Fornecedor implements Serializable {
 	private String estado;
 	private int telefone;
 	private String email;
-	@Column(name = "id_situacao", nullable = false)
 	private int situacao;
 	
 	public String getNome() {
