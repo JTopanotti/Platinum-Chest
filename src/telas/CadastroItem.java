@@ -1,8 +1,6 @@
 package telas;
 
-import dao.FornecedorDAO;
 import dao.PatrimonioDAO;
-import dao.UsuarioDAO;
 import objetos.Fornecedor;
 import objetos.Patrimonio;
 import objetos.Usuario;
@@ -18,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.border.BevelBorder;
 
+import runnables.RunnableCadastro;
+
 public class CadastroItem extends JInternalFrame {
 	private JTextField nome;
 	private JTextField item;
@@ -25,9 +25,9 @@ public class CadastroItem extends JInternalFrame {
 	private JTextField valor;
 	private JTextField deprec;
 	private JComboBox situacao;
-	private JComboBox fornecedor;
+	final private JComboBox fornecedor;
 	private JComboBox setor;
-	private JComboBox usuario;
+	final private JComboBox usuario;
 	private JFormattedTextField data_compra;
 	private JFormattedTextField data_ger;
 
@@ -108,13 +108,14 @@ public class CadastroItem extends JInternalFrame {
 		data_compra.setColumns(10);
 
 		fornecedor = new JComboBox();
-		List<Fornecedor> fornecedores = new FornecedorDAO().getFornecedores();
-		fornecedor.setModel(new DefaultComboBoxModel(fornecedores.toArray()));
+		final List<Fornecedor> fornecedores = null;
+		new Thread(new RunnableCadastro<Fornecedor>(fornecedores, "fornecedor", fornecedor)).run();
+		System.out.println("PASS");
 		panel_14.add(fornecedor);
 
 		usuario = new JComboBox();
-		List<Usuario> usuarios = new UsuarioDAO().getUsuarios();
-		usuario.setModel(new DefaultComboBoxModel(usuarios.toArray()));
+		List<Usuario> usuarios = null;
+		new Thread(new RunnableCadastro<Usuario>(usuarios, "usuario", usuario)).run();
 		panel_14.add(usuario);
 
 		Date d = new Date(System.currentTimeMillis());
