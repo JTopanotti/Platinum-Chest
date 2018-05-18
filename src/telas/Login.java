@@ -133,9 +133,9 @@ public class Login extends JFrame {
 		Thread t = new Thread(() -> {
             try {
                 Utils.gravarUltimoAcesso(username, "ultimo_acesso.txt");
-                Utils.gravarLogAcesso(username, "log_acessos.txt");
+                Utils.gravarLog(username, "log_acessos.txt");
             } catch(IOException e) {
-                System.out.println(e);
+            	Utils.gravarException();
             }
         });
 		t.start();

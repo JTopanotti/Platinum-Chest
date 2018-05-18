@@ -4,13 +4,13 @@ import db.Conexao;
 import db.SessionCreator;
 import objetos.Fornecedor;
 import org.hibernate.Session;
+import utils.Utils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +18,15 @@ import java.util.List;
 public class FornecedorDAO {
 
     public List<Fornecedor> getFornecedores(){
-        Session session = SessionCreator.getSession();
-        List<Fornecedor> fornecedores = session.createCriteria(Fornecedor.class).list();
-        session.close();
-        return fornecedores;
+        try {
+            Session session = SessionCreator.getSession();
+            List<Fornecedor> fornecedores = session.createCriteria(Fornecedor.class).list();
+            session.close();
+            return fornecedores;
+        } catch (Exception e){
+            Utils.gravarException();
+            return null;
+        }
     }
 
     public ArrayList<Fornecedor> getFornecedoresPorNome(String nome){
@@ -44,14 +49,14 @@ public class FornecedorDAO {
                     fornecedores.add(fornecedor);
                 }
 
-            } catch(SQLException e){
-                e.printStackTrace();
+            } catch(Exception e){
+                Utils.gravarException();
             }
         }
         return fornecedores;
     }
 
-    public Fornecedor getFornecedorPorId(int id){
+    /*public Fornecedor getFornecedorPorId(int id){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
         EntityManager em = factory.createEntityManager();
         Fornecedor forn = em.find(Fornecedor.class, id);
@@ -60,18 +65,23 @@ public class FornecedorDAO {
         em.close();
         factory.close();
         return forn;
-    }
+    } */
 
     public boolean salvarFornecedor(Fornecedor forn){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
-        EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(forn);
-        em.getTransaction().commit();
-        System.out.println("Fornecedor cadastrado: " + forn.getId() + ", Nome: " + forn.getNome());
-        em.close();
-        factory.close();
-        return true;
+        try {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
+            EntityManager em = factory.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(forn);
+            em.getTransaction().commit();
+            System.out.println("Fornecedor cadastrado: " + forn.getId() + ", Nome: " + forn.getNome());
+            em.close();
+            factory.close();
+            return true;
+        } catch (Exception e){
+            Utils.gravarException();
+            return false;
+        }
     }
 
 }

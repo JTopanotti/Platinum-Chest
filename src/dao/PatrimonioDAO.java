@@ -4,6 +4,7 @@ import db.Conexao;
 import db.SessionCreator;
 import objetos.Patrimonio;
 import org.hibernate.Session;
+import utils.Utils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,32 +38,42 @@ public class PatrimonioDAO {
                     patrimonios.add(patrimonio);
                 }
 
-            } catch(SQLException e){
-                e.printStackTrace();
+            } catch(Exception e){
+                Utils.gravarException();
             }
         }
         return patrimonios;
     }
 
     public Patrimonio getPatrimonioPorId(int id){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
-        EntityManager em = factory.createEntityManager();
-        Patrimonio pat = em.find(Patrimonio.class, id);
-        em.flush();
-        em.close();
-        factory.close();
-        return pat;
+        try {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
+            EntityManager em = factory.createEntityManager();
+            Patrimonio pat = em.find(Patrimonio.class, id);
+            em.flush();
+            em.close();
+            factory.close();
+            return pat;
+        } catch (Exception e){
+            Utils.gravarException();
+            return null;
+        }
     }
 
     public boolean salvarPatrimonio(Patrimonio pat){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
-        EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(pat);
-        em.getTransaction().commit();
-        System.out.println("Patrimonio cadastrado: " + pat.getId() + ", Nome: " + pat.getNome());
-        em.close();
-        factory.close();
-        return true;
+        try {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
+            EntityManager em = factory.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(pat);
+            em.getTransaction().commit();
+            System.out.println("Patrimonio cadastrado: " + pat.getId() + ", Nome: " + pat.getNome());
+            em.close();
+            factory.close();
+            return true;
+        } catch (Exception e){
+            Utils.gravarException();
+            return false;
+        }
     }
 }

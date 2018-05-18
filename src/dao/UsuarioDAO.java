@@ -3,7 +3,9 @@ package dao;
 import db.Conexao;
 import db.SessionCreator;
 import objetos.Usuario;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import utils.Utils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,10 +20,15 @@ import java.util.List;
 public class UsuarioDAO {
 
     public List<Usuario> getUsuarios(){
-        Session session = SessionCreator.getSession();
-        List<Usuario> usuarios = session.createCriteria(Usuario.class).list();
-        session.close();
-        return usuarios;
+        try {
+            Session session = SessionCreator.getSession();
+            List<Usuario> usuarios = session.createCriteria(Usuario.class).list();
+            session.close();
+            return usuarios;
+        } catch (Exception e){
+            Utils.gravarException();
+            return null;
+        }
     }
 
     public ArrayList<Usuario> getUsuariosPorNome(String nome){
@@ -44,23 +51,28 @@ public class UsuarioDAO {
                     usuarios.add(usuario);
                 }
 
-            } catch(SQLException e){
-                e.printStackTrace();
+            } catch(Exception e){
+                Utils.gravarException();
             }
         }
         return usuarios;
     }
 
     public boolean salvarUsuario(Usuario usuario){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
-        EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(usuario);
-        em.getTransaction().commit();
-        System.out.println("Usuario cadastrado: " + usuario.getId() + ", Nome: " + usuario.getNome());
-        em.close();
-        factory.close();
-        return true;
+        try{
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Platinum-Chest");
+            EntityManager em = factory.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(usuario);
+            em.getTransaction().commit();
+            System.out.println("Usuario cadastrado: " + usuario.getId() + ", Nome: " + usuario.getNome());
+            em.close();
+            factory.close();
+            return true;
+        } catch (Exception e){
+            Utils.gravarException();
+            return false;
+        }
     }
 
     public String getCredenciais(String username){
@@ -78,8 +90,8 @@ public class UsuarioDAO {
             rs.close();
             statement.close();
 
-        } catch (SQLException e){
-            e.printStackTrace();
+        } catch (Exception e){
+            Utils.gravarException();
         }
         return senha;
     }
