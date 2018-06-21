@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "objetos.Fornecedor" table = "fornecedor">
+    <class name = "com.platinumChest.objetos.Fornecedor" table = "fornecedor">
 
         <meta attribute = "class-description">
             Contem as info de fornecedor.

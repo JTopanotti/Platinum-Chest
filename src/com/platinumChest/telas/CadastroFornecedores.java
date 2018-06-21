@@ -1,29 +1,28 @@
-package telas;
+package com.platinumChest.telas;
 
-import dao.FornecedorDAO;
-import objetos.Fornecedor;
+import com.platinumChest.listeners.AcaoListener;
+import com.platinumChest.listeners.FornecedorListener;
+import com.platinumChest.objetos.Fornecedor;
 
 import java.awt.EventQueue;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 import javax.swing.border.BevelBorder;
 
 public class CadastroFornecedores extends JInternalFrame {
-	private JTextField fornnome;
-	private JTextField forn;
-	private JFormattedTextField forncnpj;
-	private JTextField fornender;
-	private JTextField forncidade;
-	private JComboBox fornestado;
-	private JComboBox fornsit;
-	private JTextField forntelefone;
-	private JTextField fornemail;
-	private JTextField fornie;
+	private JTextField tfNome;
+	private JTextField tfFornecedor;
+	private JFormattedTextField ftfCnpj;
+	private JTextField tfEndereco;
+	private JTextField tfCidade;
+	private JComboBox cbEstado;
+	private JComboBox cbSituacao;
+	private JTextField tfTelefone;
+	private JTextField tfEmail;
+	private JTextField tfIE;
 
 	/**
 	 * Launch the application.
@@ -70,47 +69,47 @@ public class CadastroFornecedores extends JInternalFrame {
 		panel_13.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 
-		forn = new JTextField();
-		panel_2.add(forn, BorderLayout.CENTER);
-		forn.setEditable(false);
-		forn.setColumns(10);
+		tfFornecedor = new JTextField();
+		panel_2.add(tfFornecedor, BorderLayout.CENTER);
+		tfFornecedor.setEditable(false);
+		tfFornecedor.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
 		panel_2.add(btnPesquisar, BorderLayout.EAST);
 
-		fornnome = new JTextField();
-		panel_13.add(fornnome);
-		fornnome.setColumns(10);
+		tfNome = new JTextField();
+		panel_13.add(tfNome);
+		tfNome.setColumns(10);
 
-		forncnpj = new JFormattedTextField();
-		panel_13.add(forncnpj);
+		ftfCnpj = new JFormattedTextField();
+		panel_13.add(ftfCnpj);
 		
-		fornie = new JTextField();
-		panel_13.add(fornie);
-		fornie.setColumns(10);
+		tfIE = new JTextField();
+		panel_13.add(tfIE);
+		tfIE.setColumns(10);
 
-		fornender = new JTextField();
-		panel_13.add(fornender);
-		fornender.setColumns(10);
+		tfEndereco = new JTextField();
+		panel_13.add(tfEndereco);
+		tfEndereco.setColumns(10);
 
-		forncidade = new JTextField();
-		panel_13.add(forncidade);
+		tfCidade = new JTextField();
+		panel_13.add(tfCidade);
 		
-		fornestado = new JComboBox();
-		panel_13.add(fornestado);
-		fornestado.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
+		cbEstado = new JComboBox();
+		panel_13.add(cbEstado);
+		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
 
-		forntelefone = new JTextField();
-		panel_13.add(forntelefone);
-		forntelefone.setColumns(10);
+		tfTelefone = new JTextField();
+		panel_13.add(tfTelefone);
+		tfTelefone.setColumns(10);
 
-		fornemail = new JTextField();
-		panel_13.add(fornemail);
-		fornemail.setColumns(10);
+		tfEmail = new JTextField();
+		panel_13.add(tfEmail);
+		tfEmail.setColumns(10);
 
-		fornsit = new JComboBox();
-		panel_13.add(fornsit);
-		fornsit.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
+		cbSituacao = new JComboBox();
+		panel_13.add(cbSituacao);
+		cbSituacao.setModel(new DefaultComboBoxModel(new String[] {"1- Ativo", "2- Inativo"}));
 
 		JPanel panel_12 = new JPanel();
 		panel_12.setBounds(10, 11, 82, 246);
@@ -156,10 +155,6 @@ public class CadastroFornecedores extends JInternalFrame {
 		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
 		lblSituao.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_12.add(lblSituao);
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -167,14 +162,15 @@ public class CadastroFornecedores extends JInternalFrame {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JButton btnAlterar = new JButton("Salvar");
-		btnAlterar.setBounds(10, 11, 95, 23);
-		btnAlterar.addActionListener((e) -> salvarUsuario());
-		panel_1.add(btnAlterar);
+		JButton btnPersistir = new JButton("Salvar");
+		btnPersistir.setBounds(10, 11, 95, 23);
+		btnPersistir.addActionListener(new FornecedorListener(this));
+		btnPersistir.addActionListener(new AcaoListener("Cadastro de Fornecedor"));
+		panel_1.add(btnPersistir);
 		
-		JButton btnNewButton = new JButton("Cancelar");
-		btnNewButton.setBounds(10, 45, 95, 23);
-		panel_1.add(btnNewButton);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(10, 45, 95, 23);
+		panel_1.add(btnCancelar);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(10, 79, 95, 23);
@@ -190,18 +186,17 @@ public class CadastroFornecedores extends JInternalFrame {
 
 	}
 
-	private void salvarUsuario(){
+	public Fornecedor salvarFornecedor(){
 		Fornecedor fornecedor = new Fornecedor();
-		fornecedor.setCnpj(Integer.parseInt(forncnpj.getText()));
-		fornecedor.setIe(Integer.parseInt(fornie.getText()));
-		fornecedor.setEndereco(fornender.getText());
-		fornecedor.setEstado((String) fornestado.getSelectedItem());
-		fornecedor.setTelefone(Integer.parseInt(forntelefone.getText()));
-		fornecedor.setSituacao(fornsit.getSelectedIndex());
-		fornecedor.setEmail(fornemail.getText());
-		fornecedor.setCidade(forncidade.getText());
-		fornecedor.setNome(fornnome.getText());
-		new FornecedorDAO().salvarFornecedor(fornecedor);
-		JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+		fornecedor.setCnpj(Integer.parseInt(ftfCnpj.getText()));
+		fornecedor.setIe(Integer.parseInt(tfIE.getText()));
+		fornecedor.setEndereco(tfEndereco.getText());
+		fornecedor.setEstado((String) cbEstado.getSelectedItem());
+		fornecedor.setTelefone(Integer.parseInt(tfTelefone.getText()));
+		fornecedor.setSituacao(cbSituacao.getSelectedIndex());
+		fornecedor.setEmail(tfEmail.getText());
+		fornecedor.setCidade(tfCidade.getText());
+		fornecedor.setNome(tfNome.getText());
+		return fornecedor;
 	}
 }

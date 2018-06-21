@@ -1,9 +1,10 @@
-package telas;
+package com.platinumChest.telas;
 
-import dao.PatrimonioDAO;
-import objetos.Fornecedor;
-import objetos.Patrimonio;
-import objetos.Usuario;
+import com.platinumChest.listeners.AcaoListener;
+import com.platinumChest.listeners.PatrimonioListener;
+import com.platinumChest.objetos.Fornecedor;
+import com.platinumChest.objetos.Patrimonio;
+import com.platinumChest.objetos.Usuario;
 
 import java.awt.*;
 
@@ -14,22 +15,25 @@ import java.beans.PropertyVetoException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinWorkerThread;
 import javax.swing.border.BevelBorder;
 
-import runnables.RunnableCadastro;
+import com.platinumChest.runnables.ListagemBackground;
 
-public class CadastroItem extends JInternalFrame {
-	private JTextField nome;
-	private JTextField item;
-	private JFormattedTextField nf;
-	private JTextField valor;
-	private JTextField deprec;
-	private JComboBox situacao;
+public class CadastroPatrimonio extends JInternalFrame {
+	private JTextField tfNome;
+	private JTextField tfItem;
+	private JFormattedTextField ftfNF;
+	private JTextField tfValor;
+	private JTextField tfDepreciacao;
+	private JComboBox cbSituacao;
 	final private JComboBox fornecedor;
-	private JComboBox setor;
+	private JComboBox cbSetor;
 	final private JComboBox usuario;
-	private JFormattedTextField data_compra;
-	private JFormattedTextField data_ger;
+	private JFormattedTextField ftfDataCompra;
+	private JFormattedTextField ftfDataGeracao;
 
 	/**
 	 * Launch the application.
@@ -37,7 +41,7 @@ public class CadastroItem extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
             try {
-                CadastroItem frame = new CadastroItem();
+                CadastroPatrimonio frame = new CadastroPatrimonio();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -48,7 +52,7 @@ public class CadastroItem extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastroItem() {
+	public CadastroPatrimonio() {
 		try {
 			setSelected(true);
 		} catch (PropertyVetoException e) {
@@ -59,6 +63,11 @@ public class CadastroItem extends JInternalFrame {
 		setTitle("Cadastro de Patrim\u00F4nio");
 		setBounds(100, 100, 552, 352);
 		getContentPane().setLayout(null);
+
+
+		fornecedor = new JComboBox();
+		usuario = new JComboBox();
+		carregarListasBackground();
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -76,60 +85,58 @@ public class CadastroItem extends JInternalFrame {
 		panel_14.add(panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 
-		item = new JTextField();
-		panel_2.add(item);
-		item.setEditable(false);
-		item.setColumns(10);
+		tfItem = new JTextField();
+		panel_2.add(tfItem);
+		tfItem.setEditable(false);
+		tfItem.setColumns(10);
 
 		JButton btnPesquisar = new JButton("Pesquisar");
 		panel_2.add(btnPesquisar);
 
-		nome = new JTextField();
-		panel_14.add(nome);
-		nome.setColumns(10);
+		tfNome = new JTextField();
+		panel_14.add(tfNome);
+		tfNome.setColumns(10);
 
-		setor = new JComboBox();
-		panel_14.add(setor);
-		setor.setModel(new DefaultComboBoxModel(new String[] {"FIN", "RH", "TI", "COM", "PROD"}));
-		setor.setSelectedIndex(0);
+		cbSetor = new JComboBox();
+		panel_14.add(cbSetor);
+		cbSetor.setModel(new DefaultComboBoxModel(new String[] {"FIN", "RH", "TI", "COM", "PROD"}));
+		cbSetor.setSelectedIndex(0);
 
-		nf = new JFormattedTextField();
-		panel_14.add(nf);
+		ftfNF = new JFormattedTextField();
+		panel_14.add(ftfNF);
 
-		valor = new JTextField();
-		panel_14.add(valor);
-		valor.setColumns(10);
+		tfValor = new JTextField();
+		panel_14.add(tfValor);
+		tfValor.setColumns(10);
 
-		deprec = new JTextField();
-		panel_14.add(deprec);
+		tfDepreciacao = new JTextField();
+		panel_14.add(tfDepreciacao);
 
-		data_compra = new JFormattedTextField();
-		panel_14.add(data_compra);
-		data_compra.setColumns(10);
+		ftfDataCompra = new JFormattedTextField();
+		panel_14.add(ftfDataCompra);
+		ftfDataCompra.setColumns(10);
 
-		fornecedor = new JComboBox();
-		final List<Fornecedor> fornecedores = null;
-		new Thread(new RunnableCadastro<Fornecedor>(fornecedores, "fornecedor", fornecedor)).run();
+		//final List<Fornecedor> fornecedores = null;
+		//new Thread(new ListagemBackground<Fornecedor>(fornecedores, "fornecedor", fornecedor)).run();
 		System.out.println("PASS");
 		panel_14.add(fornecedor);
 
-		usuario = new JComboBox();
-		List<Usuario> usuarios = null;
-		new Thread(new RunnableCadastro<Usuario>(usuarios, "usuario", usuario)).run();
+		//List<Usuario> usuarios = null;
+		//new Thread(new ListagemBackground<Usuario>(usuarios, "usuario", usuario)).run();
 		panel_14.add(usuario);
 
 		Date d = new Date(System.currentTimeMillis());
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-		data_ger = new JFormattedTextField(f.format(d).toString());
-		data_ger.setEditable(false);
-		panel_14.add(data_ger);
-		data_ger.setColumns(10);
+		ftfDataGeracao = new JFormattedTextField(f.format(d).toString());
+		ftfDataGeracao.setEditable(false);
+		panel_14.add(ftfDataGeracao);
+		ftfDataGeracao.setColumns(10);
 
 
 
-		situacao = new JComboBox();
-		panel_14.add(situacao);
-		situacao.setModel(new DefaultComboBoxModel(new String[] {"0- Ativo", "1- Inativo"}));
+		cbSituacao = new JComboBox();
+		panel_14.add(cbSituacao);
+		cbSituacao.setModel(new DefaultComboBoxModel(new String[] {"0- Ativo", "1- Inativo"}));
 
 		JPanel panel_13 = new JPanel();
 		panel_13.setBounds(12, 12, 90, 263);
@@ -185,8 +192,9 @@ public class CadastroItem extends JInternalFrame {
 		panel_1.setBounds(391, 11, 135, 290);
 		getContentPane().add(panel_1);
 
-		JButton btnAlterar = new JButton("Salvar");
-		btnAlterar.addActionListener(e -> salvarPatrimonio());
+		JButton btnPersistir = new JButton("Salvar");
+		btnPersistir.addActionListener(new PatrimonioListener(this));
+		btnPersistir.addActionListener(new AcaoListener("Cadastro de Patrimonio"));
 
 		JButton btnNewButton = new JButton("Cancelar");
 
@@ -203,7 +211,7 @@ public class CadastroItem extends JInternalFrame {
 						.addGroup(gl_panel_1.createSequentialGroup()
 								.addGap(8)
 								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnPersistir, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
 										.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
 										.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
 										.addComponent(btnAjuda, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
@@ -214,7 +222,7 @@ public class CadastroItem extends JInternalFrame {
 				gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
 								.addGap(9)
-								.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnPersistir, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
 								.addGap(11)
 								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
 								.addGap(11)
@@ -230,25 +238,31 @@ public class CadastroItem extends JInternalFrame {
 
 	}
 
-	private void salvarPatrimonio(){
+	public Patrimonio salvarPatrimonio(){
 		Patrimonio pat = new Patrimonio();
-		pat.setNome(nome.getText());
-		pat.setSetor((String)setor.getSelectedItem());
-		pat.setSituacao(situacao.getSelectedIndex());
-		float valor_f = valor.getText().isEmpty() ? new Float(0) :
-				Float.parseFloat(valor.getText());
-		int num_nf = nf.getText().isEmpty() ? new Integer(0) :
-				Integer.parseInt(nf.getText());
-		int porc_deprec = deprec.getText().isEmpty() ? new Integer(0) :
-				Integer.parseInt(deprec.getText());
+		pat.setNome(tfNome.getText());
+		pat.setSetor((String) cbSetor.getSelectedItem());
+		pat.setSituacao(cbSituacao.getSelectedIndex());
+		float valor_f = tfValor.getText().isEmpty() ? new Float(0) :
+				Float.parseFloat(tfValor.getText());
+		int num_nf = ftfNF.getText().isEmpty() ? new Integer(0) :
+				Integer.parseInt(ftfNF.getText());
+		int porc_deprec = tfDepreciacao.getText().isEmpty() ? new Integer(0) :
+				Integer.parseInt(tfDepreciacao.getText());
 		pat.setValor(valor_f);
 		pat.setNf(num_nf);
 		pat.setDepreciacao(porc_deprec);
 		pat.setFornecedor(((Fornecedor)fornecedor.getSelectedItem()).getId());
 		pat.setUsuario(((Usuario)usuario.getSelectedItem()).getId());
-		pat.setData_compra(new Date(data_compra.getText()));
-		pat.setData_geracao(new Date(data_ger.getText()));
-		new PatrimonioDAO().salvarPatrimonio(pat);
-		JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+		pat.setData_compra(new Date(ftfDataCompra.getText()));
+		pat.setData_geracao(new Date(ftfDataGeracao.getText()));
+		return pat;
+	}
+
+	private void carregarListasBackground(){
+		Executors.newSingleThreadExecutor().execute(
+				new ListagemBackground<Fornecedor>(ListagemBackground.TIPO_FORNECEDOR, fornecedor));
+		Executors.newSingleThreadExecutor().execute(
+				new ListagemBackground<Usuario>(ListagemBackground.TIPO_USUARIO, usuario));
 	}
 }

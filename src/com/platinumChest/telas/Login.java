@@ -1,4 +1,4 @@
-package telas;
+package com.platinumChest.telas;
 
 import java.awt.EventQueue;
 
@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.io.IOException;
 
-import dao.UsuarioDAO;
-import utils.Utils;
+import com.platinumChest.dao.UsuarioDAO;
+import com.platinumChest.utils.Utils;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JPasswordField;
@@ -31,6 +31,8 @@ public class Login extends JFrame {
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
+					frame.preencherLogin();
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -114,6 +116,8 @@ public class Login extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(0, 23, 89, 23);
 		panel_3.add(btnCancelar);
+
+
 	}
 
 	private boolean verificarAcesso(){
@@ -139,5 +143,13 @@ public class Login extends JFrame {
             }
         });
 		t.start();
-	}	
+	}
+
+	private void preencherLogin(){
+		String ultimoUsuario = Utils.getUltimoUsuarioLogado();
+		if(ultimoUsuario != null){
+			this.caixauser.setText(ultimoUsuario);
+		}
+	}
+
 }

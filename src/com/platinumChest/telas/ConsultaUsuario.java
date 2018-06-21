@@ -1,7 +1,8 @@
-package telas;
+package com.platinumChest.telas;
 
-import dao.FornecedorDAO;
-import objetos.Fornecedor;
+import com.platinumChest.dao.UsuarioDAO;
+import com.platinumChest.listeners.AcaoListener;
+import com.platinumChest.objetos.Usuario;
 
 import java.awt.EventQueue;
 
@@ -12,7 +13,7 @@ import java.util.Iterator;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class ConsultaFornecedor extends JInternalFrame {
+public class ConsultaUsuario extends JInternalFrame {
     private JTextField textPesquisa;
     private JTable tabela;
 
@@ -22,7 +23,7 @@ public class ConsultaFornecedor extends JInternalFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                ConsultaItem frame = new ConsultaItem();
+                ConsultaPatrimonio frame = new ConsultaPatrimonio();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -33,7 +34,7 @@ public class ConsultaFornecedor extends JInternalFrame {
     /**
      * Create the frame.
      */
-    public ConsultaFornecedor() {
+    public ConsultaUsuario() {
         setRootPaneCheckingEnabled(false);
         setClosable(true);
         getContentPane().setLayout(new BorderLayout());
@@ -56,6 +57,7 @@ public class ConsultaFornecedor extends JInternalFrame {
         panel_1.add(new JScrollPane(tabela), BorderLayout.CENTER);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         btnPesquisar.addActionListener(arg0 -> pesquisar());
+        btnPesquisar.addActionListener(new AcaoListener("Listagem de Usuarios"));
 
         JPanel panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new BorderLayout());
@@ -69,14 +71,14 @@ public class ConsultaFornecedor extends JInternalFrame {
     }
 
     private void pesquisar(){
-        ArrayList<Fornecedor> fornecedores =
-                new FornecedorDAO().getFornecedoresPorNome(textPesquisa.getText());
-        System.out.println(fornecedores.size());
+        ArrayList<Usuario> usuarios =
+                new UsuarioDAO().getUsuariosPorNome(textPesquisa.getText());
+        System.out.println(usuarios.size());
         DefaultTableModel model =
                 new DefaultTableModel(new String[]{"ID", "NOME"}, 0);
-        Iterator it = fornecedores.iterator();
+        Iterator it = usuarios.iterator();
         while (it.hasNext()){
-            Fornecedor next = (Fornecedor) it.next();
+            Usuario next = (Usuario) it.next();
             model.addRow(new Object[]{next.getId(), next.getNome()});
         }
         tabela.setModel(model);

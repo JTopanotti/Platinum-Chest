@@ -1,4 +1,4 @@
-package db;
+package com.platinumChest.db;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

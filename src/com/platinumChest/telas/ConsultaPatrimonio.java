@@ -1,7 +1,8 @@
-package telas;
+package com.platinumChest.telas;
 
-import dao.PatrimonioDAO;
-import objetos.Patrimonio;
+import com.platinumChest.dao.PatrimonioDAO;
+import com.platinumChest.listeners.AcaoListener;
+import com.platinumChest.objetos.Patrimonio;
 
 import java.awt.EventQueue;
 
@@ -12,7 +13,7 @@ import java.util.Iterator;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class ConsultaItem extends JInternalFrame {
+public class ConsultaPatrimonio extends JInternalFrame {
 	private JTextField textPesquisa;
 	private JTable tabela;
 
@@ -22,7 +23,7 @@ public class ConsultaItem extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
             try {
-                ConsultaItem frame = new ConsultaItem();
+                ConsultaPatrimonio frame = new ConsultaPatrimonio();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -33,7 +34,7 @@ public class ConsultaItem extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaItem() {
+	public ConsultaPatrimonio() {
 		setRootPaneCheckingEnabled(false);
 		setClosable(true);
 		getContentPane().setLayout(new BorderLayout());
@@ -56,6 +57,7 @@ public class ConsultaItem extends JInternalFrame {
 		panel_1.add(new JScrollPane(tabela), BorderLayout.CENTER);
 		tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		btnPesquisar.addActionListener(arg0 -> pesquisar());
+		btnPesquisar.addActionListener(new AcaoListener("Listagem de Patrimonios"));
 
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BorderLayout());

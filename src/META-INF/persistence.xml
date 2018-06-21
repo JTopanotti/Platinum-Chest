@@ -10,10 +10,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- entidade mapeada -->
-        <class>objetos.Fornecedor</class>
-        <class>objetos.Patrimonio</class>
+        <class>com.platinumChest.objetos.Fornecedor</class>
+        <class>com.platinumChest.objetos.Patrimonio</class>
         <class>objetos.Setor</class>
-        <class>objetos.Usuario</class>
+        <class>com.platinumChest.objetos.Usuario</class>
 
         <properties>
             <!-- dados da conexao -->

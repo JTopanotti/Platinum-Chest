@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "objetos.Usuario" table = "usuario">
+    <class name = "com.platinumChest.objetos.Usuario" table = "usuario">
 
         <meta attribute = "class-description">
             Contem as info de usuario.

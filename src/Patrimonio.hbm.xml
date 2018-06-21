@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "objetos.Patrimonio" table = "patrimonio">
+    <class name = "com.platinumChest.objetos.Patrimonio" table = "patrimonio">
 
         <meta attribute = "class-description">
             Contem as info de patrimonio.

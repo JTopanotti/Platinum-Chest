@@ -1,7 +1,8 @@
-package telas;
+package com.platinumChest.telas;
 
-import dao.UsuarioDAO;
-import objetos.Usuario;
+import com.platinumChest.listeners.AcaoListener;
+import com.platinumChest.listeners.UsuarioListener;
+import com.platinumChest.objetos.Usuario;
 
 
 import javax.swing.*;
@@ -15,15 +16,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 
 public class CadastroUsuarios extends JInternalFrame {
-	private JTextField nome;
-	private JTextField usuario;
-	private JFormattedTextField cpf;
-	private JTextField endereco;
-	private JTextField cidade;
-	private JComboBox estado;
-	private JComboBox situacao;
-	private JFormattedTextField telefone;
-	private JTextField email;
+	private JTextField tfNome;
+	private JTextField tfUsuario;
+	private JFormattedTextField ftfCPF;
+	private JTextField tfEndereco;
+	private JTextField tfCidade;
+	private JComboBox cbEstado;
+	private JComboBox cbSituacao;
+	private JFormattedTextField ftfTelefone;
+	private JTextField tfEmail;
 	private MaskFormatter maskCPF;
 	private MaskFormatter maskTelefone;
 
@@ -51,7 +52,7 @@ public class CadastroUsuarios extends JInternalFrame {
 			maskCPF = new MaskFormatter("###.###.###-##");
 			maskTelefone = new MaskFormatter("(##) ####-####");
 		} catch (ParseException e) {
-			System.out.println("Ferrou bicho, a mascara ta dando problema: "+e.getMessage());
+			System.out.println("Erro de Parsing na máscara: "+e.getMessage());
 		}
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -59,10 +60,11 @@ public class CadastroUsuarios extends JInternalFrame {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 
-		JButton btnAlterar = new JButton("Salvar");
-		btnAlterar.setBounds(10, 11, 95, 23);
-		btnAlterar.addActionListener(e -> salvarUsuario());
-		panel_1.add(btnAlterar);
+		JButton btnPersistir = new JButton("Salvar");
+		btnPersistir.setBounds(10, 11, 95, 23);
+		btnPersistir.addActionListener(new UsuarioListener(this));
+		btnPersistir.addActionListener(new AcaoListener("Cadastro de Usuario"));
+		panel_1.add(btnPersistir);
 
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(10, 79, 95, 23);
@@ -140,48 +142,48 @@ public class CadastroUsuarios extends JInternalFrame {
 		panel_13.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 
-		usuario = new JTextField();
-		panel_2.add(usuario, BorderLayout.CENTER);
-		usuario.setEditable(false);
-		usuario.setColumns(10);
+		tfUsuario = new JTextField();
+		panel_2.add(tfUsuario, BorderLayout.CENTER);
+		tfUsuario.setEditable(false);
+		tfUsuario.setColumns(10);
 
 		JButton btnPesquisar = new JButton("Pesquisar");
 		panel_2.add(btnPesquisar, BorderLayout.EAST);
 
-		nome = new JTextField();
-		panel_13.add(nome);
-		nome.setColumns(10);
+		tfNome = new JTextField();
+		panel_13.add(tfNome);
+		tfNome.setColumns(10);
 
 		JComboBox classificacao = new JComboBox();
 		panel_13.add(classificacao);
 		classificacao.setModel(new DefaultComboBoxModel(new String[] {"0- Gerente", "1- Funcionario"}));
 		classificacao.setSelectedIndex(0);
 
-		cpf = new JFormattedTextField(maskCPF);
-		panel_13.add(cpf);
+		ftfCPF = new JFormattedTextField(maskCPF);
+		panel_13.add(ftfCPF);
 
-		endereco = new JTextField();
-		panel_13.add(endereco);
-		endereco.setColumns(10);
+		tfEndereco = new JTextField();
+		panel_13.add(tfEndereco);
+		tfEndereco.setColumns(10);
 
-		cidade = new JTextField();
-		panel_13.add(cidade);
+		tfCidade = new JTextField();
+		panel_13.add(tfCidade);
 
-		estado = new JComboBox();
-		panel_13.add(estado);
-		estado.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
+		cbEstado = new JComboBox();
+		panel_13.add(cbEstado);
+		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
 
-		telefone = new JFormattedTextField(maskTelefone);
-		panel_13.add(telefone);
-		telefone.setColumns(10);
+		ftfTelefone = new JFormattedTextField(maskTelefone);
+		panel_13.add(ftfTelefone);
+		ftfTelefone.setColumns(10);
 
-		email = new JTextField();
-		panel_13.add(email);
-		email.setColumns(10);
+		tfEmail = new JTextField();
+		panel_13.add(tfEmail);
+		tfEmail.setColumns(10);
 
-		situacao = new JComboBox();
-		panel_13.add(situacao);
-		situacao.setModel(new DefaultComboBoxModel(new String[] {"0- Ativo", "1- Inativo"}));
+		cbSituacao = new JComboBox();
+		panel_13.add(cbSituacao);
+		cbSituacao.setModel(new DefaultComboBoxModel(new String[] {"0- Ativo", "1- Inativo"}));
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -189,19 +191,18 @@ public class CadastroUsuarios extends JInternalFrame {
 
 	}
 
-	private void salvarUsuario(){
+	public Usuario salvarUsuario(){
 		Usuario user = new Usuario();
-		user.setNome(nome.getText());
-		user.setCidade(cidade.getText());
-		user.setCpf(Integer.parseInt(cpf.getText()));
-		user.setEmail(email.getText());
-		user.setEndereco(endereco.getText());
-		user.setEstado((String)estado.getSelectedItem());
-		user.setSituacao(situacao.getSelectedIndex());
-		user.setTelefone(Integer.parseInt(telefone.getText()));
-		user.setUsuario(usuario.getText());
-		new UsuarioDAO().salvarUsuario(user);
-		JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+		user.setNome(tfNome.getText());
+		user.setCidade(tfCidade.getText());
+		user.setCpf(Integer.parseInt(ftfCPF.getText()));
+		user.setEmail(tfEmail.getText());
+		user.setEndereco(tfEndereco.getText());
+		user.setEstado((String) cbEstado.getSelectedItem());
+		user.setSituacao(cbSituacao.getSelectedIndex());
+		user.setTelefone(Integer.parseInt(ftfTelefone.getText()));
+		user.setUsuario(tfUsuario.getText());
+		return user;
 
 	}
 }

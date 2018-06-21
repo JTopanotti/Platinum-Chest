@@ -1,4 +1,4 @@
-package objetos;
+package com.platinumChest.objetos;
 
 import javax.persistence.*;
 import java.util.Date;

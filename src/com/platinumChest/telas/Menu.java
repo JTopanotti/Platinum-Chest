@@ -1,4 +1,4 @@
-package telas;
+package com.platinumChest.telas;
 
 import java.awt.BorderLayout;
 
@@ -45,9 +45,9 @@ public class Menu extends JFrame {
 		setJMenuBar(menuBar);
 		
 		miCadastroProduto.addActionListener((e) -> {
-			CadastroItem cadastroItem = new CadastroItem();
-			cadastroItem.setVisible(true);
-			panel.add(cadastroItem);
+			CadastroPatrimonio cadastroPatrimonio = new CadastroPatrimonio();
+			cadastroPatrimonio.setVisible(true);
+			panel.add(cadastroPatrimonio);
 		});
 		miCadastroUsuario.addActionListener((e) -> {
 			CadastroUsuarios cadastroUsuario = new CadastroUsuarios();
@@ -62,9 +62,9 @@ public class Menu extends JFrame {
 		});
 
 		miConsultaProduto.addActionListener((e) -> {
-			ConsultaItem consultaItem = new ConsultaItem();
-			consultaItem.setVisible(true);
-			panel.add(consultaItem);
+			ConsultaPatrimonio consultaPatrimonio = new ConsultaPatrimonio();
+			consultaPatrimonio.setVisible(true);
+			panel.add(consultaPatrimonio);
 		});
 
 		miConsultaFornecedor.addActionListener((e) -> {
