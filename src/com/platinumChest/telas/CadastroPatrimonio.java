@@ -11,29 +11,45 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinWorkerThread;
 import javax.swing.border.BevelBorder;
+import javax.swing.text.MaskFormatter;
 
 import com.platinumChest.runnables.ListagemBackground;
 
 public class CadastroPatrimonio extends JInternalFrame {
 	private JTextField tfNome;
 	private JTextField tfItem;
-	private JFormattedTextField ftfNF;
-	private JTextField tfValor;
-	private JTextField tfDepreciacao;
+	private JNumberTextField ftfNF;
+	private JNumberTextField tfValor;
+	private JNumberTextField tfDepreciacao;
 	private JComboBox cbSituacao;
 	final private JComboBox fornecedor;
 	private JComboBox cbSetor;
 	final private JComboBox usuario;
 	private JFormattedTextField ftfDataCompra;
 	private JFormattedTextField ftfDataGeracao;
+	private MaskFormatter maskDataCompra;
+	private MaskFormatter maskDepreciacao;
+
+
+
+	private class JNumberTextField extends JTextField{
+		@Override
+		protected void processKeyEvent(KeyEvent keyEvent) {
+			if(Character.isDigit(keyEvent.getKeyChar()) || '.' == (keyEvent.getKeyChar())
+					|| keyEvent.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+				super.processKeyEvent(keyEvent);
+			}
+			keyEvent.consume();
+
+		}
+	}
+
 
 	/**
 	 * Launch the application.
@@ -43,6 +59,7 @@ public class CadastroPatrimonio extends JInternalFrame {
             try {
                 CadastroPatrimonio frame = new CadastroPatrimonio();
                 frame.setVisible(true);
+                frame.toFront();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -64,6 +81,12 @@ public class CadastroPatrimonio extends JInternalFrame {
 		setBounds(100, 100, 552, 352);
 		getContentPane().setLayout(null);
 
+		try {
+			maskDepreciacao = new MaskFormatter("###");
+			maskDataCompra = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			System.out.println("Erro de Parsing na máscara: "+e.getMessage());
+		}
 
 		fornecedor = new JComboBox();
 		usuario = new JComboBox();
@@ -102,32 +125,29 @@ public class CadastroPatrimonio extends JInternalFrame {
 		cbSetor.setModel(new DefaultComboBoxModel(new String[] {"FIN", "RH", "TI", "COM", "PROD"}));
 		cbSetor.setSelectedIndex(0);
 
-		ftfNF = new JFormattedTextField();
+		ftfNF = new JNumberTextField();
 		panel_14.add(ftfNF);
 
-		tfValor = new JTextField();
+		tfValor = new JNumberTextField();
 		panel_14.add(tfValor);
 		tfValor.setColumns(10);
 
-		tfDepreciacao = new JTextField();
+		tfDepreciacao = new JNumberTextField();
 		panel_14.add(tfDepreciacao);
 
-		ftfDataCompra = new JFormattedTextField();
+
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+		Date d = new Date(System.currentTimeMillis());
+
+		ftfDataCompra = new JFormattedTextField(maskDataCompra);
+		ftfDataCompra.setText(f.format(d));
 		panel_14.add(ftfDataCompra);
 		ftfDataCompra.setColumns(10);
-
-		//final List<Fornecedor> fornecedores = null;
-		//new Thread(new ListagemBackground<Fornecedor>(fornecedores, "fornecedor", fornecedor)).run();
 		System.out.println("PASS");
 		panel_14.add(fornecedor);
-
-		//List<Usuario> usuarios = null;
-		//new Thread(new ListagemBackground<Usuario>(usuarios, "usuario", usuario)).run();
 		panel_14.add(usuario);
 
-		Date d = new Date(System.currentTimeMillis());
-		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-		ftfDataGeracao = new JFormattedTextField(f.format(d).toString());
+		ftfDataGeracao = new JFormattedTextField(f.format(d));
 		ftfDataGeracao.setEditable(false);
 		panel_14.add(ftfDataGeracao);
 		ftfDataGeracao.setColumns(10);
@@ -260,9 +280,16 @@ public class CadastroPatrimonio extends JInternalFrame {
 	}
 
 	private void carregarListasBackground(){
-		Executors.newSingleThreadExecutor().execute(
+		Thread listagemFornecedores = new Thread(
 				new ListagemBackground<Fornecedor>(ListagemBackground.TIPO_FORNECEDOR, fornecedor));
-		Executors.newSingleThreadExecutor().execute(
+		Thread listagemUsuarios = new Thread(
 				new ListagemBackground<Usuario>(ListagemBackground.TIPO_USUARIO, usuario));
+		listagemFornecedores.start();
+		listagemUsuarios.start();
+
+		/*Executors.newSingleThreadExecutor().execute(
+				new ListagemBackground<Fornecedor>(ListagemBackground.TIPO_FORNECEDOR, fornecedor));*/
+		/*Executors.newSingleThreadExecutor().execute(
+				new ListagemBackground<Usuario>(ListagemBackground.TIPO_USUARIO, usuario));*/
 	}
 }

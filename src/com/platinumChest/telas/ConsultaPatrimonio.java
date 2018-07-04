@@ -1,6 +1,6 @@
 package com.platinumChest.telas;
 
-import com.platinumChest.dao.PatrimonioDAO;
+import com.platinumChest.persistence.PatrimonioPersister;
 import com.platinumChest.listeners.AcaoListener;
 import com.platinumChest.objetos.Patrimonio;
 
@@ -25,6 +25,7 @@ public class ConsultaPatrimonio extends JInternalFrame {
             try {
                 ConsultaPatrimonio frame = new ConsultaPatrimonio();
                 frame.setVisible(true);
+                frame.toFront();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -38,7 +39,8 @@ public class ConsultaPatrimonio extends JInternalFrame {
 		setRootPaneCheckingEnabled(false);
 		setClosable(true);
 		getContentPane().setLayout(new BorderLayout());
-		
+
+		setTitle("Consulta de Patrimonio");
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel.setLayout(new BorderLayout());
@@ -72,7 +74,7 @@ public class ConsultaPatrimonio extends JInternalFrame {
 
 	private void pesquisar(){
 		ArrayList<Patrimonio> patrimonios =
-				new PatrimonioDAO().getPatrimoniosPorNome(textPesquisa.getText());
+				new PatrimonioPersister().getPatrimoniosPorNome(textPesquisa.getText());
 		System.out.println(patrimonios.size());
 		DefaultTableModel model =
 				new DefaultTableModel(new String[]{"ID", "NOME", "VALOR", "DATA GERACAO"}, 0);

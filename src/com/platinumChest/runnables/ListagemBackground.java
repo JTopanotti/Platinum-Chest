@@ -1,12 +1,10 @@
 package com.platinumChest.runnables;
 
-import com.platinumChest.dao.FornecedorDAO;
-import com.platinumChest.dao.UsuarioDAO;
-import org.omg.CORBA.INTERNAL;
+import com.platinumChest.persistence.FornecedorPersister;
+import com.platinumChest.persistence.UsuarioPersister;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListagemBackground<T> implements Runnable {
 
@@ -26,11 +24,11 @@ public class ListagemBackground<T> implements Runnable {
     public void run() {
         switch(tipo){
             case TIPO_FORNECEDOR:
-                lista = (ArrayList<T>) new FornecedorDAO().getFornecedores();
+                lista = (ArrayList<T>) new FornecedorPersister().getFornecedores();
                 comboBox.setModel(new DefaultComboBoxModel(lista.toArray()));
                 break;
             case TIPO_USUARIO:
-                lista = (ArrayList<T>) new UsuarioDAO().getUsuarios();
+                lista = (ArrayList<T>) new UsuarioPersister().getUsuarios();
                 comboBox.setModel(new DefaultComboBoxModel(lista.toArray()));
                 break;
         }

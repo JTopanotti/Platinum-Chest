@@ -1,8 +1,7 @@
 package com.platinumChest.utils;
 
 import java.io.*;
-import java.util.Date;
-import java.util.Stack;
+import java.util.*;
 
 public class Utils {
 	
@@ -35,17 +34,15 @@ public class Utils {
 	}
 
 	public static void gravarException(){
-		StackTraceElement[] elementos = Thread.currentThread().getStackTrace();
-		String stackTrace = System.getProperty("line.separator");
-
-		for(StackTraceElement element : elementos){
-			stackTrace += System.getProperty("line.separator") + element.getClassName() + "."
-					+ element.getMethodName() + "{" + element.getFileName()
-					+ ":" + element.getLineNumber() + "}";
-		}
-
+		List<StackTraceElement> elementos = Arrays.asList(Thread.currentThread().getStackTrace());
+		String ls = System.lineSeparator();
+		String stackTrace = "EXCEPTION ==> [" + ls + elementos.stream()
+				.map(element -> element.getClassName() + "." + element.getMethodName() + "{" +
+						element.getFileName() + ":" + element.getLineNumber() + "}")
+				.reduce("", (sum, element) ->
+					sum += element + ls)
+				+ "]" + ls;
 		try{
-			Date data = new Date();
 			gravarLog(stackTrace, "log_sistema.txt");
 		} catch (IOException e) {
 			System.out.println("Erro de sistema impossibilita a gravação de log!!!");

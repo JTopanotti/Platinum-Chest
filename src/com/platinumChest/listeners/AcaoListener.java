@@ -15,6 +15,6 @@ public class AcaoListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        new Thread(() -> Utils.gravarAcao(acao)).run();
+        new Thread(() -> Utils.gravarAcao(acao)).start();
     }
 }

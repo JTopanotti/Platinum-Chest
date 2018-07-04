@@ -1,9 +1,8 @@
 package com.platinumChest.listeners;
 
-import com.platinumChest.dao.UsuarioDAO;
 import com.platinumChest.objetos.Usuario;
+import com.platinumChest.persistence.UsuarioPersister;
 import com.platinumChest.telas.CadastroUsuarios;
-import com.platinumChest.utils.Utils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +19,7 @@ public class UsuarioListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Usuario usuario = cadastro.salvarUsuario();
-        new UsuarioDAO().salvarUsuario(usuario);
+        new UsuarioPersister().salvarUsuario(usuario);
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 }

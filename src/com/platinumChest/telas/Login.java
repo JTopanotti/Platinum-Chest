@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.io.IOException;
 
-import com.platinumChest.dao.UsuarioDAO;
+import com.platinumChest.persistence.UsuarioPersister;
 import com.platinumChest.utils.Utils;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
@@ -20,34 +20,22 @@ import javax.swing.JPasswordField;
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField caixauser;
-	private JPasswordField caixapass;
+	private JTextField tfUsername;
+	private JPasswordField tfPassword;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					frame.setVisible(true);
-					frame.preencherLogin();
+		EventQueue.invokeLater(() -> {
+			try {
+				Login frame = new Login();
+				frame.setVisible(true);
+				frame.preencherLogin();
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
-	}
-	
-	private int check(String user, String pass) {
-		//Busca do usuario no banco de dados
-		if(user.equals("gustavo") && pass.equals("123")) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
 	}
 
 	/**
@@ -57,6 +45,7 @@ public class Login extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 292, 103);
+		setTitle("Login");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -86,13 +75,13 @@ public class Login extends JFrame {
 		panel_4.add(panel_1);
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		caixauser = new JTextField();
-		panel_1.add(caixauser);
-		caixauser.setColumns(10);
+		tfUsername = new JTextField();
+		panel_1.add(tfUsername);
+		tfUsername.setColumns(10);
 		
-		caixapass = new JPasswordField();
-		panel_1.add(caixapass);
-		caixapass.setColumns(10);
+		tfPassword = new JPasswordField();
+		panel_1.add(tfPassword);
+		tfPassword.setColumns(10);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(165, 0, 89, 46);
@@ -106,8 +95,9 @@ public class Login extends JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválido", "Credenciais inválidos", JOptionPane.WARNING_MESSAGE);
             } else {
                 Menu menu = new Menu();
-                gravarAcesso(caixauser.getText());
+                gravarAcesso(tfUsername.getText());
                 menu.setVisible(true);
+                this.dispose();
             }
         });
 		btnEntrar.setBounds(0, 0, 89, 23);
@@ -121,12 +111,12 @@ public class Login extends JFrame {
 	}
 
 	private boolean verificarAcesso(){
-		String username = caixauser.getText();
-		String password = caixapass.getText();
+		String username = tfUsername.getText();
+		String password = tfPassword.getText();
 		if(username.isEmpty() || password.isEmpty())
 			return false;
 		else {
-			String credencial = new UsuarioDAO().getCredenciais(username);
+			String credencial = new UsuarioPersister().getCredenciais(username);
 			if(credencial == null) return false;
 			else return password.equals(credencial);
 		}
@@ -148,7 +138,7 @@ public class Login extends JFrame {
 	private void preencherLogin(){
 		String ultimoUsuario = Utils.getUltimoUsuarioLogado();
 		if(ultimoUsuario != null){
-			this.caixauser.setText(ultimoUsuario);
+			this.tfUsername.setText(ultimoUsuario);
 		}
 	}
 

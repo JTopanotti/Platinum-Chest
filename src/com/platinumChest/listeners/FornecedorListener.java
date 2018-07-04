@@ -1,9 +1,8 @@
 package com.platinumChest.listeners;
 
-import com.platinumChest.dao.FornecedorDAO;
 import com.platinumChest.objetos.Fornecedor;
+import com.platinumChest.persistence.FornecedorPersister;
 import com.platinumChest.telas.CadastroFornecedores;
-import com.platinumChest.utils.Utils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +19,7 @@ public class FornecedorListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Fornecedor fornecedor = cadastro.salvarFornecedor();
-        new FornecedorDAO().salvarFornecedor(fornecedor);
+        new FornecedorPersister().salvarFornecedor(fornecedor);
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 }

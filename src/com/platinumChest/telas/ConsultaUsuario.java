@@ -1,6 +1,6 @@
 package com.platinumChest.telas;
 
-import com.platinumChest.dao.UsuarioDAO;
+import com.platinumChest.persistence.UsuarioPersister;
 import com.platinumChest.listeners.AcaoListener;
 import com.platinumChest.objetos.Usuario;
 
@@ -25,6 +25,7 @@ public class ConsultaUsuario extends JInternalFrame {
             try {
                 ConsultaPatrimonio frame = new ConsultaPatrimonio();
                 frame.setVisible(true);
+                frame.toFront();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -39,6 +40,7 @@ public class ConsultaUsuario extends JInternalFrame {
         setClosable(true);
         getContentPane().setLayout(new BorderLayout());
 
+        setTitle("Consulta de Usuários");
         JPanel panel = new JPanel();
         panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         panel.setLayout(new BorderLayout());
@@ -72,7 +74,7 @@ public class ConsultaUsuario extends JInternalFrame {
 
     private void pesquisar(){
         ArrayList<Usuario> usuarios =
-                new UsuarioDAO().getUsuariosPorNome(textPesquisa.getText());
+                new UsuarioPersister().getUsuariosPorNome(textPesquisa.getText());
         System.out.println(usuarios.size());
         DefaultTableModel model =
                 new DefaultTableModel(new String[]{"ID", "NOME"}, 0);

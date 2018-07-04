@@ -3,16 +3,15 @@ package com.platinumChest.telas;
 import com.platinumChest.listeners.AcaoListener;
 import com.platinumChest.listeners.UsuarioListener;
 import com.platinumChest.objetos.Usuario;
+import com.platinumChest.utils.TextFieldLimiter;
 
 
 import javax.swing.*;
 import java.awt.BorderLayout;
 import javax.swing.text.MaskFormatter;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.text.ParseException;
-import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 
 public class CadastroUsuarios extends JInternalFrame {
@@ -151,6 +150,7 @@ public class CadastroUsuarios extends JInternalFrame {
 		panel_2.add(btnPesquisar, BorderLayout.EAST);
 
 		tfNome = new JTextField();
+		tfNome.setDocument(new TextFieldLimiter(255));
 		panel_13.add(tfNome);
 		tfNome.setColumns(10);
 
@@ -160,13 +160,16 @@ public class CadastroUsuarios extends JInternalFrame {
 		classificacao.setSelectedIndex(0);
 
 		ftfCPF = new JFormattedTextField(maskCPF);
+		ftfCPF.setDocument(new TextFieldLimiter(14));
 		panel_13.add(ftfCPF);
 
 		tfEndereco = new JTextField();
+		tfEndereco.setDocument(new TextFieldLimiter(255));
 		panel_13.add(tfEndereco);
 		tfEndereco.setColumns(10);
 
 		tfCidade = new JTextField();
+		tfCidade.setDocument(new TextFieldLimiter(255));
 		panel_13.add(tfCidade);
 
 		cbEstado = new JComboBox();
@@ -174,20 +177,18 @@ public class CadastroUsuarios extends JInternalFrame {
 		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
 
 		ftfTelefone = new JFormattedTextField(maskTelefone);
+		ftfTelefone.setDocument(new TextFieldLimiter(14));
 		panel_13.add(ftfTelefone);
 		ftfTelefone.setColumns(10);
 
 		tfEmail = new JTextField();
+		tfEmail.setDocument(new TextFieldLimiter(255));
 		panel_13.add(tfEmail);
 		tfEmail.setColumns(10);
 
 		cbSituacao = new JComboBox();
 		panel_13.add(cbSituacao);
 		cbSituacao.setModel(new DefaultComboBoxModel(new String[] {"0- Ativo", "1- Inativo"}));
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 
 	}
 

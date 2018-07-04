@@ -1,6 +1,6 @@
 package com.platinumChest.telas;
 
-import com.platinumChest.dao.FornecedorDAO;
+import com.platinumChest.persistence.FornecedorPersister;
 import com.platinumChest.listeners.AcaoListener;
 import com.platinumChest.objetos.Fornecedor;
 
@@ -25,6 +25,7 @@ public class ConsultaFornecedor extends JInternalFrame {
             try {
                 ConsultaPatrimonio frame = new ConsultaPatrimonio();
                 frame.setVisible(true);
+                frame.toFront();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -39,6 +40,7 @@ public class ConsultaFornecedor extends JInternalFrame {
         setClosable(true);
         getContentPane().setLayout(new BorderLayout());
 
+        setTitle("Consulta de Fornecedores");
         JPanel panel = new JPanel();
         panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         panel.setLayout(new BorderLayout());
@@ -72,7 +74,7 @@ public class ConsultaFornecedor extends JInternalFrame {
 
     private void pesquisar(){
         ArrayList<Fornecedor> fornecedores =
-                new ArrayList<>(new FornecedorDAO().getFornecedoresPorNome(textPesquisa.getText()));
+                new ArrayList<>(new FornecedorPersister().getFornecedoresPorNome(textPesquisa.getText()));
         DefaultTableModel model =
                 new DefaultTableModel(new String[]{"ID", "NOME"}, 0);
         Iterator it = fornecedores.iterator();

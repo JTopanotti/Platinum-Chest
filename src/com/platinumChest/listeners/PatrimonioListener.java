@@ -1,7 +1,7 @@
 package com.platinumChest.listeners;
 
-import com.platinumChest.dao.PatrimonioDAO;
 import com.platinumChest.objetos.Patrimonio;
+import com.platinumChest.persistence.PatrimonioPersister;
 import com.platinumChest.telas.CadastroPatrimonio;
 
 import javax.swing.*;
@@ -19,7 +19,7 @@ public class PatrimonioListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Patrimonio patrimonio = cadastro.salvarPatrimonio();
-        new PatrimonioDAO().salvarPatrimonio(patrimonio);
+        new PatrimonioPersister().salvarPatrimonio(patrimonio);
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 }

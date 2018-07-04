@@ -3,6 +3,7 @@ package com.platinumChest.telas;
 import com.platinumChest.listeners.AcaoListener;
 import com.platinumChest.listeners.FornecedorListener;
 import com.platinumChest.objetos.Fornecedor;
+import com.platinumChest.utils.TextFieldLimiter;
 
 import java.awt.EventQueue;
 
@@ -10,7 +11,9 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.beans.PropertyVetoException;
+import java.text.ParseException;
 import javax.swing.border.BevelBorder;
+import javax.swing.text.MaskFormatter;
 
 public class CadastroFornecedores extends JInternalFrame {
 	private JTextField tfNome;
@@ -20,9 +23,11 @@ public class CadastroFornecedores extends JInternalFrame {
 	private JTextField tfCidade;
 	private JComboBox cbEstado;
 	private JComboBox cbSituacao;
-	private JTextField tfTelefone;
+	private JFormattedTextField tfTelefone;
 	private JTextField tfEmail;
 	private JTextField tfIE;
+	private MaskFormatter maskCnpj;
+	private MaskFormatter maskTelefone;
 
 	/**
 	 * Launch the application.
@@ -33,6 +38,7 @@ public class CadastroFornecedores extends JInternalFrame {
 				try {
 					CadastroFornecedores frame = new CadastroFornecedores();
 					frame.setVisible(true);
+					frame.toFront();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,9 +56,17 @@ public class CadastroFornecedores extends JInternalFrame {
 			e.printStackTrace();
 		}
 		setClosable(true);
+		setTitle("Cadastro de Fornecedor");
 		setRootPaneCheckingEnabled(false);
 		setBounds(100, 100, 533, 320);
 		getContentPane().setLayout(null);
+
+		try {
+			maskCnpj = new MaskFormatter("##.###.###/####-##");
+			maskTelefone = new MaskFormatter("(##) ####-####");
+		} catch (ParseException e) {
+			System.out.println("Erro de Parsing na máscara: "+e.getMessage());
+		}
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -78,32 +92,39 @@ public class CadastroFornecedores extends JInternalFrame {
 		panel_2.add(btnPesquisar, BorderLayout.EAST);
 
 		tfNome = new JTextField();
+		tfNome.setDocument(new TextFieldLimiter(255));
 		panel_13.add(tfNome);
 		tfNome.setColumns(10);
 
-		ftfCnpj = new JFormattedTextField();
+		ftfCnpj = new JFormattedTextField(maskCnpj);
+		ftfCnpj.setDocument(new TextFieldLimiter(18));
 		panel_13.add(ftfCnpj);
 		
 		tfIE = new JTextField();
+		tfIE.setDocument(new TextFieldLimiter(11));
 		panel_13.add(tfIE);
 		tfIE.setColumns(10);
 
 		tfEndereco = new JTextField();
+		tfEndereco.setDocument(new TextFieldLimiter(255));
 		panel_13.add(tfEndereco);
 		tfEndereco.setColumns(10);
 
 		tfCidade = new JTextField();
+		tfCidade.setDocument(new TextFieldLimiter(255));
 		panel_13.add(tfCidade);
 		
 		cbEstado = new JComboBox();
 		panel_13.add(cbEstado);
 		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"Acre", "Alagoas", "Amap\u00E1", "Amazonas", "Bahia", "Cear\u00E1", "Distrito Federal", "Esp\u00EDrito Santo", "Goi\u00E1s", "Maranh\u00E3o", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Par\u00E1", "Para\u00EDba", "Paran\u00E1", "Pernambuco", "Piau\u00ED", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rond\u00F4nia", "Roraima", "Santa Catarina", "S\u00E3o Paulo", "Sergipe", "Tocantins"}));
 
-		tfTelefone = new JTextField();
+		tfTelefone = new JFormattedTextField(maskTelefone);
+		tfTelefone.setDocument(new TextFieldLimiter(14));
 		panel_13.add(tfTelefone);
 		tfTelefone.setColumns(10);
 
 		tfEmail = new JTextField();
+		tfEmail.setDocument(new TextFieldLimiter(255));
 		panel_13.add(tfEmail);
 		tfEmail.setColumns(10);
 
