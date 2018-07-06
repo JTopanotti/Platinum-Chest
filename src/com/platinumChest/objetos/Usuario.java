@@ -13,12 +13,12 @@ public class Usuario{
 	 private int id;
 	 private String nome;
      private String usuario;
-     private int cpf;
+     private String cpf;
      private String endereco;
      private String cidade;
      private String estado;
 	 private int situacao;
-     private int telefone;
+     private String telefone;
      private String email;
      
      
@@ -47,11 +47,11 @@ public class Usuario{
 		this.usuario = usuario;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -85,11 +85,11 @@ public class Usuario{
 
 	public void setSituacao(int situacao) { this.situacao = situacao; }
 
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 

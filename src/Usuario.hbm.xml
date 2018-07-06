@@ -16,12 +16,12 @@
         
         <property name="nome" column="nome" type="string" />
         <property name="usuario" column="usuario" type="string" />
-        <property name="cpf" column="cpf" type="int" />
+        <property name="cpf" column="cpf" type="string" />
         <property name="endereco" column="endereco" type="string" />
         <property name="cidade" column="cidade" type="string" />
         <property name="estado" column="estado" type="string" />
         <property name="situacao" column="situacao" type="int" />
-        <property name="telefone" column="telefone" type="int" />
+        <property name="telefone" column="telefone" type="string" />
         <property name="email" column="email" type="string" />
 
     </class>

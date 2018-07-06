@@ -209,11 +209,11 @@ public class CadastroFornecedores extends JInternalFrame {
 
 	public Fornecedor salvarFornecedor(){
 		Fornecedor fornecedor = new Fornecedor();
-		fornecedor.setCnpj(Integer.parseInt(ftfCnpj.getText()));
+		fornecedor.setCnpj(ftfCnpj.getText().replaceAll("\\D+",""));
 		fornecedor.setIe(Integer.parseInt(tfIE.getText()));
 		fornecedor.setEndereco(tfEndereco.getText());
 		fornecedor.setEstado((String) cbEstado.getSelectedItem());
-		fornecedor.setTelefone(Integer.parseInt(tfTelefone.getText()));
+		fornecedor.setTelefone(tfTelefone.getText().replaceAll("\\D+",""));
 		fornecedor.setSituacao(cbSituacao.getSelectedIndex());
 		fornecedor.setEmail(tfEmail.getText());
 		fornecedor.setCidade(tfCidade.getText());

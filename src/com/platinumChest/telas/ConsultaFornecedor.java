@@ -75,6 +75,7 @@ public class ConsultaFornecedor extends JInternalFrame {
     private void pesquisar(){
         ArrayList<Fornecedor> fornecedores =
                 new ArrayList<>(new FornecedorPersister().getFornecedoresPorNome(textPesquisa.getText()));
+        System.out.println(fornecedores.size());
         DefaultTableModel model =
                 new DefaultTableModel(new String[]{"ID", "NOME"}, 0);
         Iterator it = fornecedores.iterator();

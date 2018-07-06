@@ -52,7 +52,7 @@ public class Utils {
 	public static void gravarAcao(String acao){
 		String usuario = getUltimoUsuarioLogado();
 		Date data = new Date();
-		String log_acao = "ACAO [" + data.toString() + "]: \"" + acao + "\" finalizado pelo usuário + {" +
+		String log_acao = "ACAO [" + data.toString() + "]: \"" + acao + "\" finalizado pelo usuário {" +
 				usuario + "};";
 
 		try {

@@ -15,13 +15,13 @@
         </id>
 
         <property name="nome" column="nome" type="string" />
-        <property name="cnpj" column="cnpj" type="int" />
+        <property name="cnpj" column="cnpj" type="string" />
         <property name="ie" column="ie" type="int" />
         <property name="endereco" column="endereco" type="string" />
         <property name="cidade" column="cidade" type="string" />
         <property name="estado" column="estado" type="string" />
         <property name="situacao" column="situacao" type="int" />
-        <property name="telefone" column="telefone" type="int" />
+        <property name="telefone" column="telefone" type="string" />
         <property name="email" column="email" type="string" />
 
     </class>

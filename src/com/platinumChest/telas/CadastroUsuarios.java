@@ -196,12 +196,12 @@ public class CadastroUsuarios extends JInternalFrame {
 		Usuario user = new Usuario();
 		user.setNome(tfNome.getText());
 		user.setCidade(tfCidade.getText());
-		user.setCpf(Integer.parseInt(ftfCPF.getText()));
+		user.setCpf(ftfCPF.getText().replaceAll("\\D+",""));
 		user.setEmail(tfEmail.getText());
 		user.setEndereco(tfEndereco.getText());
 		user.setEstado((String) cbEstado.getSelectedItem());
 		user.setSituacao(cbSituacao.getSelectedIndex());
-		user.setTelefone(Integer.parseInt(ftfTelefone.getText()));
+		user.setTelefone(ftfTelefone.getText().replaceAll("\\D+",""));
 		user.setUsuario(tfUsuario.getText());
 		return user;
 

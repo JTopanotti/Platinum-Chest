@@ -143,7 +143,6 @@ public class CadastroPatrimonio extends JInternalFrame {
 		ftfDataCompra.setText(f.format(d));
 		panel_14.add(ftfDataCompra);
 		ftfDataCompra.setColumns(10);
-		System.out.println("PASS");
 		panel_14.add(fornecedor);
 		panel_14.add(usuario);
 

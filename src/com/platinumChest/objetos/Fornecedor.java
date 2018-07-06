@@ -7,20 +7,18 @@ import java.io.Serializable;
 @Table(name="fornecedor")
 public class Fornecedor implements Serializable {
 
-	//Tem que arrumar os campos dessa classe, pra ficar igual a tabela MySQL,
-	//assim facilitando o processo do Hibernate
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
 	private String nome;
-	private int cnpj;
+	private String cnpj;
 	private int ie;
 	private String endereco;
 	private String cidade;
 	private String estado;
-	private int telefone;
+	private String telefone;
 	private String email;
 	private int situacao;
 	
@@ -30,10 +28,10 @@ public class Fornecedor implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
-	public void setCnpj(int cnpj) { this.cnpj = cnpj; }
+	public void setCnpj(String cnpj) { this.cnpj = cnpj; }
 	public int getIe() {
 		return ie;
 	}
@@ -58,10 +56,10 @@ public class Fornecedor implements Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	public String getEmail() {

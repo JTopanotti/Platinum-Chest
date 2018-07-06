@@ -2,13 +2,8 @@ package com.platinumChest.telas;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JDesktopPane;
 
 public class Menu extends JFrame {
 
